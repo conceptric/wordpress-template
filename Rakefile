@@ -24,6 +24,7 @@ task :setup do
   puts "Created standard development files"
 
   File.open("#{development_shared_path}/assets/wp-config.php", 'w') do |f|
+    f.puts "<?php"
     f.puts "define('DB_NAME', 'database_name');"
     f.puts "define('DB_USER', 'database_user');"
     f.puts "define('DB_PASSWORD', 'password');"
@@ -34,6 +35,7 @@ task :setup do
     f.puts "define ('WPLANG', '');"
     f.puts "define('ABSPATH', dirname(__FILE__).'/');"
     f.puts "require_once(ABSPATH.'wp-settings.php');"
+    f.puts "?>"
   end
   puts "Created default development wp-config"
 end
