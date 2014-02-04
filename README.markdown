@@ -16,3 +16,12 @@ production.rb and staging.rb
 
 * "remote_server"
 * the url for the primary domain
+
+Finally, you'll need to set up the file 'shared/assets/wp-config.php' to reflect your local development preferences. It should be noted that nothing in the shared directory is used in production.
+
+I use Bundler so
+
+bundle install --path vendor
+bundle exec rake -T
+
+should tell you where to go from here.
