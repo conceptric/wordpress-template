@@ -21,7 +21,8 @@ Finally, you'll need to set up the file 'shared/assets/wp-config.php' to reflect
 
 I use Bundler so
 
-bundle install --path vendor
-bundle exec rake -T
-
+    bundle install --path vendor
+    bundle exec rake setup
+    bundle exec rake -T
+    
 should tell you where to go from here.

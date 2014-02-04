@@ -8,6 +8,35 @@ wp_path                   = "#{vendor_path}/wordpress"
 vendor_plugins_path       = "#{vendor_path}/plugins"
 wp_unwanted_files         = %w{readme.html license.txt wp-config-sample.php}
 
+desc "Run this command to setup the project structure"
+task :setup do
+  %x{mkdir #{root}/backup}
+  %x{mkdir #{build_path}}
+  %x{mkdir -p #{app_path}/assets #{app_path}/themes}
+  %x{mkdir -p #{development_shared_path}/assets} 
+  %x{mkdir -p #{development_shared_path}/development}
+  %x{mkdir -p #{development_shared_path}/uploads}
+  puts "Created a development directories"
+
+  %x{touch #{development_shared_path}/assets/sitemap.xml}
+  %x{touch #{development_shared_path}/assets/sitemap.xml.gz}
+  %x{touch #{development_shared_path}/assets/wp-config.php}
+  puts "Created standard development files"
+
+  File.open("#{development_shared_path}/assets/wp-config.php", 'w') do |f|
+    f.puts "define('DB_NAME', 'database_name');"
+    f.puts "define('DB_USER', 'database_user');"
+    f.puts "define('DB_PASSWORD', 'password');"
+    f.puts "define('DB_HOST', 'localhost');"
+    f.puts "define('DB_CHARSET', 'utf8');"
+    f.puts "define('DB_COLLATE', '');"
+    f.puts "$table_prefix  = 'wp_';"
+    f.puts "define ('WPLANG', '');"
+    f.puts "define('ABSPATH', dirname(__FILE__).'/');"
+    f.puts "require_once(ABSPATH.'wp-settings.php');"
+  end
+  puts "Created default development wp-config"
+end
 
 desc "Upgrade the WordPress in vendors to the specified version"
 task :upgrade_wordpress do           
