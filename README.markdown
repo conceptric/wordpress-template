@@ -19,10 +19,16 @@ production.rb and staging.rb
 
 Finally, you'll need to set up the file 'shared/assets/wp-config.php' to reflect your local development preferences. It should be noted that nothing in the shared directory is used in production.
 
-I use Bundler so
+I use Bundler so the sequence goes something like this. First install the gems in a local vendor directory.
 
     bundle install --path vendor
+    
+Then run a rake command to generate the development directory structure and template configuration files (you edit these later).
+    
     bundle exec rake setup
+    
+Finally,
+    
     bundle exec rake -T
     
 should tell you where to go from here.
