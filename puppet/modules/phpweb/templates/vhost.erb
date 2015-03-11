@@ -1,0 +1,10 @@
+<VirtualHost *:80>
+  DocumentRoot /var/www/app
+  ServerName localhost
+  <Directory "/var/www/app/">
+     Options Indexes SymLinksIfOwnerMatch
+     AllowOverride All Options FileInfo
+     Order allow,deny
+     Allow from all
+  </Directory>
+</VirtualHost>
