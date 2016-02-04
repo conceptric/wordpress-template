@@ -1,20 +1,50 @@
-=== Plugin Name ===
-Contributors: catapult, husobj
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=M2FLCU6Z4A2LA
-Tags: cookies, eu, cookie law, implied consent, uk cookie consent
-Requires at least: 3.5.0
-Tested up to: 3.9.1
-Stable tag: 1.8.2
+=== Cookie Consent ===
+Contributors: Catapult_Themes, catapult, husobj, jraczynski
+Donate Link: https://paypal.com
+Tags: cookie law, cookies, EU, implied consent, uk cookie consent, compliance, eu cookie law, eu privacy directive, privacy, privacy directive,  consent, cookie, cookie compliance, cookie law, eu cookie, notice, notification, notify, cookie notice, cookie notification, cookie notify
+Requires at least: 4.3
+Tested up to: 4.4.1
+Stable tag: 2.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Shows an unobtrusive yet clear message to users that your site uses cookies.
+The only cookie consent plugin you'll ever need.
 
 == Description ==
 
+Cookie Consent 2.0 is a major rewrite of the popular Cookie Consent plugin. We've retained all the features that originally made the plugin so popular, such as speed of set-up, but added new features based on feedback and requests.
+
+= Activation =
+
+One of the most popular aspects of the plugin is its simplicity of use. The new version is no different - simply install and activate the plugin to automatically add the cookie consent notification bar without any need to configure it. On activation, the plugin creates and populates a page on your site with information about your cookie policy and automatically links to the page from the notification bar. So if you're using the default settings, it's a matter of seconds to get up and running.
+
+= New Features =
+
+We've extended the options with the plugin and in version 2.0, we've added many new features, including:
+
+* Choice of dismissal method - either on click by the user or timed
+* Choice of dismissal element - either button or 'x' close
+* Option to show the notification on the first page only - subsequent pages visited by the user will not display the message
+* Choice of position - either top or bottom bar, or floating in one of the corners of the screen
+* Better translation support
+* Better responsive support
+* More customization options - including the ability to update styles from within the customizer
+* Inherits your theme styles where possible
+* The option to use an absolute or external URL to link to for further information
+* Set the cookie duration
+* Set the cookie version - updating a version will reset the cookie on all user sites
+
+= Translations =
+
+* Polish
+* Russian
+* Slovakian
+
+= EU Directive =
+
 We think this is the simplest but most effective method of dealing with the legislation.
 
-The plug-in is a straightforward approach to help you comply with the UK interpretation of the EU regulations regarding usage of website cookies. It follows the notion of "implied consent" as described by the UK's Information Commissioner and makes the assumption that most users who choose not to accept cookies will do so for all websites. A user to your site is presented with a clear yet unobtrusive notification that the site is using cookies and may then acknowledge and dismiss the notification or click to find out more. The plug-in automatically creates a new page with pre-populated information on cookies and how to disable them, which you may edit further if you wish.
+The plug-in is a straightforward approach to help you comply with the EU regulations regarding usage of website cookies. It follows the notion of "implied consent" as described by the UK's Information Commissioner and makes the assumption that most users who choose not to accept cookies will do so for all websites. A user to your site is presented with a clear yet unobtrusive notification that the site is using cookies and may then acknowledge and dismiss the notification or click to find out more. The plug-in automatically creates a new page with pre-populated information on cookies and how to disable them, which you may edit further if you wish.
 
 Importantly, the plug-in does not disable cookies on your site or prevent the user from continuing to browse the site. Several plug-ins have adopted the "explicit consent" approach which obliges users to opt in to cookies on your site. This is likely to deter visitors.
 
@@ -28,7 +58,11 @@ Importantly, the plug-in does not disable cookies on your site or prevent the us
 
 = Where can I find out more about this plug-in? =
 
-You can find out more about the plug-in on [its plug-in page](http://catapultdesign.co.uk/plugin/uk-cookie-consent/).
+You can find out more about the plug-in on [its plug-in page](http://catapultthemes.com/cookie-consent/).
+
+= Is there a demo? =
+
+Yep. Take a look at [the demo](http://cookieconsent.catapultthemes.com/). Reset the cookie by [going to this URL](http://cookieconsent.catapultthemes.com/?cookie=delete).
 
 = Does this definitely cover me under the legislation? =
 
@@ -36,17 +70,59 @@ You have to make up your own mind about that or consult a legal expert.
 
 = Where can I find out more about the UK laws regarding cookies? =
 
-We have written a short article on [our interpretation of the UK cookie law](http://catapultdesign.co.uk/uk-cookie-consent/). This outlines some of the background to the regulations and the reasons for choosing the 'implied consent' method.
-
 You will find more details of the regulations on the [Information Commissioner's Office site](http://www.ico.gov.uk/for_organisations/privacy_and_electronic_communications/the_guide/cookies.aspx).
 
 == Screenshots ==
 
-1. The plug-in places an unobtrusive notification at the top of the page. The user can acknowledge and dismiss the notification by clicking the green button - this is consent for the use of cookies. Alternatively, the user can click the link for more information to be directed to a pre-populated page describing what cookies are and how to disable them.
-
-1. Simple settings page allows you to modify the message and button text.
+1. Notification bar along the top of the screen
+2. Detail of notification bar on the bottom of the screen
+3. Notification box in corner
+4. Customization panel
+5. Example settings page
 
 == Changelog ==
+
+= 2.0.7 =
+* Added: Slovakian translation (thanks to lacike)
+
+= 2.0.6 =
+* Added: flat button option
+* Added: Russian translation
+
+= 2.0.5 =
+* Fixed: notification hides correctly when stylesheet is dequeued
+
+= 2.0.4 =
+* Added: Polish translation (thanks to jraczynski for all items in this update)
+* Updated: .pot file generated with l18n tool
+* Updated: correct text domain in customizer.php
+* Updated: removed spaces in translator functions
+* Updated: plugin name translatable
+
+= 2.0.3 =
+* Fixed: more_info_target option not saving
+* Fixed: button text getting cropped
+* Changed: default position of accept button with notification text
+
+= 2.0.2 =
+* Fixed: retain settings from previous version
+
+= 2.0.1 =
+* Fixed: admin formatting
+
+= 2.0.0 =
+* Major rewrite
+* Added: Choice of dismissal method - either on click by the user or timed
+* Added: Choice of dismissal element - either button or ‘x' close
+* Added: Option to show the notification on the first page only - subsequent pages visited by the user will not display the message
+* Added: Choice of position - either top or bottom bar, or floating in one of the corners of the screen
+* Changed: Better translation support
+* Changed: Better responsive support
+* Changed: More customization options - including the ability to update styles from within the customizer
+* Changed: Inherits your theme styles where possible
+* Changed: The option to use an absolute or external URL to link to for further information
+* Added: Set the cookie duration
+* Added: Set the cookie version - updating a version will reset the cookie on all user sites
 
 = 1.8.2 =
 * Admin update
@@ -112,4 +188,4 @@ You will find more details of the regulations on the [Information Commissioner's
 
 == Upgrade Notice ==
 
-Recommended
+Please note that the upgrade to version 2.x is significant. Although we've made every effort to ensure your settings are retained from previous versions, you may notice minor design differences to the notification bar.
