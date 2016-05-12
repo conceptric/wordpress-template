@@ -1,17 +1,17 @@
 GIT
   remote: git://github.com/conceptric/cyberstruction-wordpress.git
-  revision: 76e7ce61dd6640f5f36a1fce96c3cbfe3521a0b6
+  revision: a632ff489597dfc8f8da1e88bb61956ddd9c5748
   specs:
-    cyberstruction_wordpress (0.2)
+    cyberstruction_wordpress (0.4.1)
       capistrano
       capistrano-ext
       cyberstruction_deploy
 
 GIT
   remote: git://github.com/conceptric/cyberstruction_deploy.git
-  revision: b14a44e53476a00771c84e498367ec14e894ca9c
+  revision: 80c4bf7bbedce9ead8b437016f36c0aee8436a6f
   specs:
-    cyberstruction_deploy (0.3.1)
+    cyberstruction_deploy (0.4.1)
       capistrano
       capistrano-ext
       rake
@@ -27,15 +27,15 @@ GEM
       net-ssh-gateway (>= 1.1.0)
     capistrano-ext (1.2.1)
       capistrano (>= 1.0.0)
-    highline (1.6.20)
-    net-scp (1.1.2)
+    highline (1.7.8)
+    net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
       net-ssh (>= 2.6.5)
-    net-ssh (2.8.0)
+    net-ssh (3.1.1)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
-    rake (10.1.1)
+    rake (11.1.2)
     rvm (1.11.3.9)
     rvm-capistrano (1.5.1)
       capistrano (~> 2.15.4)
@@ -52,3 +52,6 @@ DEPENDENCIES
   rake
   rvm (= 1.11.3.9)
   rvm-capistrano (= 1.5.1)
+
+BUNDLED WITH
+   1.12.3
