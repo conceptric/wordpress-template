@@ -3,7 +3,7 @@
 Plugin Name: Cookie Consent
 Plugin URI: http://catapultthemes.com/cookie-consent/
 Description: The only cookie consent plugin you'll ever need.
-Version: 2.0.11
+Version: 2.0.12
 Author: Catapult_Themes
 Author URI: http://catapultthemes.com/
 Text Domain: uk-cookie-consent

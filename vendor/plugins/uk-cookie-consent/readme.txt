@@ -3,8 +3,8 @@ Contributors: Catapult_Themes, husobj, jraczynski
 Donate Link: https://paypal.com
 Tags: cookie law, cookies, EU, implied consent, uk cookie consent, compliance, eu cookie law, eu privacy directive, privacy, privacy directive,  consent, cookie, cookie compliance, cookie law, eu cookie, notice, notification, notify, cookie notice, cookie notification, cookie notify
 Requires at least: 4.3
-Tested up to: 4.5.1
-Stable tag: 2.0.11
+Tested up to: 4.5.2
+Stable tag: 2.0.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 The only cookie consent plugin you'll ever need.
@@ -54,6 +54,8 @@ You will find more details of the regulations on the [Information Commissioner's
 4. Customization panel
 5. Example settings page
 == Changelog ==
+= 2.0.12 =
+* Fixed: added flex-shrink: 0 to prevent button overflowing container on mobile
 = 2.0.11 =
 * Fixed: syntax error in class-ctcc-public.php
 = 2.0.10 =
