@@ -1,0 +1,36 @@
+<wpml-config>
+	<admin-texts>
+		<key name="ctcc_options_settings">
+			<key name="closure" />
+			<key name="first_page" />
+			<key name="duration" />
+			<key name="cookie_expiry" />
+			<key name="cookie_version" />
+		</key>
+		<key name="ctcc_content_settings">
+			<key name="heading_text"/>
+			<key name="notification_text"/>
+			<key name="accept_text"/>
+			<key name="more_info_text"/>
+			<key name="more_info_page"/>
+			<key name="more_info_url"/>
+			<key name="more_info_target"/>
+	    </key>
+		<key name="ctcc_styles_settings">
+			<key name="position" />
+			<key name="container_class" />
+			<key name="enqueue_styles" />
+			<key name="rounded_corners" />
+			<key name="drop_shadow" />
+			<key name="display_accept_with_text" />
+			<key name="x_close" />
+			<key name="text_color" />
+			<key name="bg_color" />
+			<key name="link_color" />
+			<key name="button_color" />
+			<key name="button_bg_color" />
+			<key name="bg_color" />
+			<key name="flat_button" />
+		</key>
+	</admin-texts>
+</wpml-config>

@@ -13,6 +13,12 @@
 	margin-right: -300px;
 	width: 280px;
 }
+.ctdb-banners img {
+	max-width: 100%;
+}
+.ctdb-banner {
+	margin-bottom: 1.5em;
+}
 @media only screen and (max-width: 850px) {
 	.ctdb-outer-wrap {
 		margin-right: 0;

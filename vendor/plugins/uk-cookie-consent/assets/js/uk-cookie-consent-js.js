@@ -23,6 +23,7 @@ function catapultAcceptCookies() {
 	catapultSetCookie('catAccCookies', ctcc_vars.version, ctcc_vars.expiry);
 	jQuery("html").removeClass('has-cookie-bar');
 	jQuery("html").css("margin-top","0");
+	jQuery("#catapult-cookie-bar").fadeOut();
 }
 // The function called by the timer
 function ctccCloseNotification() {
