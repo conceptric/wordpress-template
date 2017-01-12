@@ -10,6 +10,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, guest: 80, host: 4545
   config.vm.network :forwarded_port, guest: 9292, host: 4646
 
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 1024
+    v.cpus = 1
+  end
+
   config.vm.synced_folder "public/", "/var/www/app", 
     owner: "www-data", group: "www-data"
 
