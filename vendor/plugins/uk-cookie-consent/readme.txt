@@ -1,10 +1,10 @@
 === Cookie Consent ===
 Contributors: Catapult_Themes, husobj, jraczynski
-Donate Link: https://paypal.com
-Tags: cookie law, cookies, EU, implied consent, uk cookie consent, compliance, eu cookie law, eu privacy directive, privacy, privacy directive, consent, cookie, cookie compliance, cookie law, eu cookie, notice, notification, notify, cookie notice, cookie notification, cookie notify, wpml, cookie bar, cookie notification bar
+Donate Link: https://www.paypal.me/catapultthemes
+Tags: cookie law, cookies, eu cookie law, eu privacy directive, cookie compliance, cookie law, cookie notice, cookie notification, wpml, geo ip
 Requires at least: 4.3
-Tested up to: 4.7
-Stable tag: 2.2.5
+Tested up to: 4.7.3
+Stable tag: 2.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 The only cookie consent plugin you'll ever need.
@@ -12,6 +12,7 @@ The only cookie consent plugin you'll ever need.
 == Description ==
 Cookie Consent is one of the simplest and most popular cookie notification plugins out there. It's been actively developed and supported since 2012 and has over 100 5 star reviews.
 
+> <strong>New in 2.3.0:</strong><br>Geo IP support - choose which continents to display notifications (requires GeoIP Detect plugin to be installed)<br>
 > <strong>New in 2.2.0:</strong><br>Easily select pages or posts where the cookie notification doesn't display. You now have complete control over which pages display a notification and which don't.<br>Close on scroll - optionally choose scrolling as closure method.
 
 = Simple set up =
@@ -70,6 +71,18 @@ You will find more details of the regulations on the [Information Commissioner's
 
 == Changelog ==
 
+= 2.3.2 =
+* Updated: incorrect text domains
+* Updated: tracking class to 1.0.1
+* Updated: removed unnecessary keys from wpml-config.xml
+
+= 2.3.1 =
+* Added: link to create privacy policy
+* Added: tracking
+
+= 2.3.0 =
+* Added: GeoIP support (suggested by jeffrobbins)
+
 = 2.2.5 =
 * Fixed: dismissed notification bar obscuring content
 
@@ -83,7 +96,7 @@ You will find more details of the regulations on the [Information Commissioner's
 * Fixed: text domain in class-ctcc-metafield (spotted by mmmisiek)
 
 = 2.2.1 =
-* Updated: better escapingn (suggested by djpaul)
+* Updated: better escaping (suggested by djpaul)
 
 = 2.2.0 =
 * Added: optionally exclude pages and posts from displaying the cookie notification (suggested by jeffrobbins)

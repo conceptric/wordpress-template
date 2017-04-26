@@ -93,6 +93,14 @@ if ( ! class_exists ( 'CTCC_Admin' ) ) {
 			);
 			
 			add_settings_field ( 
+				'exclude_zones', 
+				__( 'Exclude Zones', 'uk-cookie-consent' ), 
+				array ( $this, 'exclude_zones_render' ),
+				'ctcc_options',
+				'ctcc_options_section'
+			);
+			
+			add_settings_field ( 
 				'duration', 
 				__( 'Notification Duration', 'uk-cookie-consent' ), 
 				array ( $this, 'duration_render' ),
@@ -366,6 +374,7 @@ if ( ! class_exists ( 'CTCC_Admin' ) ) {
 				'scroll_height'					=> 200,
 				'first_page'					=>	0,
 				'enable_metafield'				=>	0,
+				'zones_only'					=> '',
 				'duration'						=>	60,
 				'cookie_expiry'					=>	30,
 				'cookie_version'				=>	1
@@ -452,47 +461,66 @@ if ( ! class_exists ( 'CTCC_Admin' ) ) {
 		public function closure_render() { 
 			$options = get_option( 'ctcc_options_settings' ); ?>
 			<select name='ctcc_options_settings[closure]'>
-				<option value='click' <?php selected( $options['closure'], 'click' ); ?>><?php _e ( 'On Click', 'uk-cookie-consent' ); ?></option>
-				<option value='scroll' <?php selected( $options['closure'], 'scroll' ); ?>><?php _e ( 'On Scroll', 'uk-cookie-consent' ); ?></option>
-				<option value='timed' <?php selected( $options['closure'], 'timed' ); ?>><?php _e ( 'Timed', 'uk-cookie-consent' ); ?></option>
+				<option value='click' <?php selected( $options['closure'], 'click' ); ?>><?php _e( 'On Click', 'uk-cookie-consent' ); ?></option>
+				<option value='scroll' <?php selected( $options['closure'], 'scroll' ); ?>><?php _e( 'On Scroll', 'uk-cookie-consent' ); ?></option>
+				<option value='timed' <?php selected( $options['closure'], 'timed' ); ?>><?php _e( 'Timed', 'uk-cookie-consent' ); ?></option>
 				
 			</select>
-			<p class="description"><?php _e ( 'How you want the user to close the notification', 'uk-cookie-consent' ); ?></p>
+			<p class="description"><?php _e( 'How you want the user to close the notification', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 		
 		public function first_page_render() { 
 			$options = get_option( 'ctcc_options_settings' ); ?>
-			<input type='checkbox'  name='ctcc_options_settings[first_page]' <?php checked ( ! empty ( $options['first_page'] ), 1 ); ?> value='1'>
-			<p class="description"><?php _e ( 'Select this to show the notification only on the first page the user visits', 'uk-cookie-consent' ); ?></p>
+			<input type='checkbox' name='ctcc_options_settings[first_page]' <?php checked ( ! empty ( $options['first_page'] ), 1 ); ?> value='1'>
+			<p class="description"><?php _e( 'Select this to show the notification only on the first page the user visits', 'uk-cookie-consent' ); ?></p>
+		<?php
+		}
+		
+		public function exclude_zones_render() { 
+			$options = get_option( 'ctcc_options_settings' );
+			$zones = array();
+			if( isset( $options['exclude_zones'] ) ) {
+				$zones = $options['exclude_zones'];
+			} ?>
+			<select multiple name='ctcc_options_settings[exclude_zones][]'>
+				<option value='AF' <?php selected( in_array( 'AF', $zones ) ); ?>><?php _e( 'Africa', 'uk-cookie-consent' ); ?></option>
+				<option value='AN' <?php selected( in_array( 'AN', $zones ) ); ?>><?php _e( 'Antarctica', 'uk-cookie-consent' ); ?></option>
+				<option value='AS' <?php selected( in_array( 'AS', $zones ) ); ?>><?php _e( 'Asia', 'uk-cookie-consent' ); ?></option>
+				<option value='EU' <?php selected( in_array( 'EU', $zones ) ); ?>><?php _e( 'Europe', 'uk-cookie-consent' ); ?></option>
+				<option value='NA' <?php selected( in_array( 'NA', $zones ) ); ?>><?php _e( 'North America', 'uk-cookie-consent' ); ?></option>
+				<option value='OC' <?php selected( in_array( 'OC', $zones ) ); ?>><?php _e( 'Oceania', 'uk-cookie-consent' ); ?></option>
+				<option value='SA' <?php selected( in_array( 'SA', $zones ) ); ?>><?php _e( 'South America', 'uk-cookie-consent' ); ?></option>
+			</select>
+			<p class="description"><?php _e( 'If you have the <a href="https://wordpress.org/plugins/geoip-detect/" target="_blank">GeoIP Detect</a> plugin activated, you can specify which areas of the world to exclude from displaying the notification.', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 		
 		public function scroll_height_render() { 
 			$options = get_option( 'ctcc_options_settings' ); ?>
 			<input type="number" min="1" name="ctcc_options_settings[scroll_height]" value="<?php echo esc_attr( $options['scroll_height'] ); ?>">
-			<p class="description"><?php _e ( 'If you chose Scroll as the close method, enter the distance in pixels the user should scroll before the notification closes', 'uk-cookie-consent' ); ?></p>
+			<p class="description"><?php _e( 'If you chose Scroll as the close method, enter the distance in pixels the user should scroll before the notification closes', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 
 		public function duration_render() { 
 			$options = get_option( 'ctcc_options_settings' ); ?>
 			<input type="number" min="1" name="ctcc_options_settings[duration]" value="<?php echo esc_attr( $options['duration'] ); ?>">
-			<p class="description"><?php _e ( 'If you chose Timer as the close method, enter how many seconds the notification should display for', 'uk-cookie-consent' ); ?></p>
+			<p class="description"><?php _e( 'If you chose Timer as the close method, enter how many seconds the notification should display for', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 		
 		public function cookie_expiry_render() { 
 			$options = get_option( 'ctcc_options_settings' ); ?>
 			<input type="number" min="1" name="ctcc_options_settings[cookie_expiry]" value="<?php echo esc_attr( $options['cookie_expiry'] ); ?>">
-			<p class="description"><?php _e ( 'The number of days that the cookie is set for', 'uk-cookie-consent' ); ?></p>
+			<p class="description"><?php _e( 'The number of days that the cookie is set for', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 		
 		public function cookie_version_render() { 
 			$options = get_option( 'ctcc_options_settings' ); ?>
 			<input type="text" name="ctcc_options_settings[cookie_version]" value="<?php echo esc_attr( $options['cookie_version'] ); ?>">
-			<p class="description"><?php _e ( 'A version number for the cookie - update this to invalidate the cookie and force all users to view the notification again', 'uk-cookie-consent' ); ?></p>
+			<p class="description"><?php _e( 'A version number for the cookie - update this to invalidate the cookie and force all users to view the notification again', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 		
@@ -503,28 +531,28 @@ if ( ! class_exists ( 'CTCC_Admin' ) ) {
 		public function heading_text_render() { 
 			$ctcc_content_settings = get_option( 'ctcc_content_settings' ); ?>
 			<input type="text" name="ctcc_content_settings[heading_text]" value="<?php echo esc_attr( $ctcc_content_settings['heading_text'] ); ?>">
-			<p class="description"><?php _e ( 'The heading text - only applies if you are not using a top or bottom bar', 'uk-cookie-consent' ); ?></p>
+			<p class="description"><?php _e( 'The heading text - only applies if you are not using a top or bottom bar', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 		
 		public function notification_text_render() { 
 			$ctcc_content_settings = get_option( 'ctcc_content_settings' ); ?>
 			<input class="widefat" type="text" name="ctcc_content_settings[notification_text]" value="<?php echo esc_attr( $ctcc_content_settings['notification_text'] ); ?>">
-			<p class="description"><?php _e ( 'The default text to indicate that your site uses cookies', 'uk-cookie-consent' ); ?></p>
+			<p class="description"><?php _e( 'The default text to indicate that your site uses cookies', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 		
 		public function accept_text_render() { 
 			$ctcc_content_settings = get_option( 'ctcc_content_settings' ); ?>
 			<input type="text" name="ctcc_content_settings[accept_text]" value="<?php echo esc_attr( $ctcc_content_settings['accept_text'] ); ?>">
-			<p class="description"><?php _e ( 'The default text to dismiss the notification', 'uk-cookie-consent' ); ?></p>
+			<p class="description"><?php _e( 'The default text to dismiss the notification', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 		
 		public function more_info_text_render() { 
 			$ctcc_content_settings = get_option( 'ctcc_content_settings' ); ?>
 			<input type="text" name="ctcc_content_settings[more_info_text]" value="<?php echo esc_attr( $ctcc_content_settings['more_info_text'] ); ?>">
-			<p class="description"><?php _e ( 'The default text to use to link to a page providing further information', 'uk-cookie-consent' ); ?></p>
+			<p class="description"><?php _e( 'The default text to use to link to a page providing further information', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 		
@@ -540,24 +568,24 @@ if ( ! class_exists ( 'CTCC_Admin' ) ) {
 						<option value='<?php echo $page -> ID; ?>' <?php selected( $ctcc_content_settings['more_info_page'], $page -> ID ); ?>><?php echo $page -> post_title; ?></option>
 					<?php } ?>
 				</select>
-				<p class="description"><?php _e ( 'The page containing further information about your cookie policy', 'discussion-board' ); ?></p>
+				<p class="description"><?php _e( 'The page containing further information about your cookie policy', 'uk-cookie-consent' ); ?></p>
 			<?php }
 		}
 
 		public function more_info_url_render() { 
 			$ctcc_content_settings = get_option( 'ctcc_content_settings' ); ?>
 			<input type="url" name="ctcc_content_settings[more_info_url]" value="<?php echo esc_url( $ctcc_content_settings['more_info_url'] ); ?>">
-			<p class="description"><?php _e ( 'You can add an absolute URL here to override the More Info Page setting above. Use this to link to an external website for further information about cookies.', 'uk-cookie-consent' ); ?></p>
+			<p class="description"><?php _e( 'You can add an absolute URL here to override the More Info Page setting above. Use this to link to an external website for further information about cookies.', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 		
 		public function more_info_target_render() { 
 			$ctcc_content_settings = get_option( 'ctcc_content_settings' ); ?>
 			<select name='ctcc_content_settings[more_info_target]'>
-				<option value='_blank' <?php selected( $ctcc_content_settings['more_info_target'], '_blank' ); ?>><?php _e ( 'New Tab', 'uk-cookie-consent' ); ?></option>
-				<option value='_self' <?php selected( $ctcc_content_settings['more_info_target'], '_self' ); ?>><?php _e ( 'Same Tab', 'uk-cookie-consent' ); ?></option>
+				<option value='_blank' <?php selected( $ctcc_content_settings['more_info_target'], '_blank' ); ?>><?php _e( 'New Tab', 'uk-cookie-consent' ); ?></option>
+				<option value='_self' <?php selected( $ctcc_content_settings['more_info_target'], '_self' ); ?>><?php _e( 'Same Tab', 'uk-cookie-consent' ); ?></option>
 			</select>
-			<p class="description"><?php _e ( 'Open the More Information page in the same or new tab.', 'uk-cookie-consent' ); ?></p>
+			<p class="description"><?php _e( 'Open the More Information page in the same or new tab.', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 		
@@ -568,122 +596,126 @@ if ( ! class_exists ( 'CTCC_Admin' ) ) {
 		public function position_render() { 
 			$options = get_option( 'ctcc_styles_settings' ); ?>
 			<select name='ctcc_styles_settings[position]'>
-				<option value='top-bar' <?php selected( $options['position'], 'top-bar' ); ?>><?php _e ( 'Top Bar', 'uk-cookie-consent' ); ?></option>
-				<option value='bottom-bar' <?php selected( $options['position'], 'bottom-bar' ); ?>><?php _e ( 'Bottom Bar', 'uk-cookie-consent' ); ?></option>
-				<option value='top-left-block' <?php selected( $options['position'], 'top-left-block' ); ?>><?php _e ( 'Top Left Block', 'uk-cookie-consent' ); ?></option>
-				<option value='top-right-block' <?php selected( $options['position'], 'top-right-block' ); ?>><?php _e ( 'Top Right Block', 'uk-cookie-consent' ); ?></option>
-				<option value='bottom-left-block' <?php selected( $options['position'], 'bottom-left-block' ); ?>><?php _e ( 'Bottom Left Block', 'uk-cookie-consent' ); ?></option>
-				<option value='bottom-right-block' <?php selected( $options['position'], 'bottom-right-block' ); ?>><?php _e ( 'Bottom Right Block', 'uk-cookie-consent' ); ?></option>
+				<option value='top-bar' <?php selected( $options['position'], 'top-bar' ); ?>><?php _e( 'Top Bar', 'uk-cookie-consent' ); ?></option>
+				<option value='bottom-bar' <?php selected( $options['position'], 'bottom-bar' ); ?>><?php _e( 'Bottom Bar', 'uk-cookie-consent' ); ?></option>
+				<option value='top-left-block' <?php selected( $options['position'], 'top-left-block' ); ?>><?php _e( 'Top Left Block', 'uk-cookie-consent' ); ?></option>
+				<option value='top-right-block' <?php selected( $options['position'], 'top-right-block' ); ?>><?php _e( 'Top Right Block', 'uk-cookie-consent' ); ?></option>
+				<option value='bottom-left-block' <?php selected( $options['position'], 'bottom-left-block' ); ?>><?php _e( 'Bottom Left Block', 'uk-cookie-consent' ); ?></option>
+				<option value='bottom-right-block' <?php selected( $options['position'], 'bottom-right-block' ); ?>><?php _e( 'Bottom Right Block', 'uk-cookie-consent' ); ?></option>
 			</select>
-			<p class="description"><?php _e ( 'Where the notification should appear', 'uk-cookie-consent' ); ?></p>
+			<p class="description"><?php _e( 'Where the notification should appear', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 
 		public function container_class_render() { 
 			$options = get_option( 'ctcc_styles_settings' ); ?>
 			<input type="text" name="ctcc_styles_settings[container_class]" value="<?php echo esc_attr( $options['container_class'] ); ?>">
-			<p class="description"><?php _e ( 'You can add an optional wrapper class, eg container, here to align the notification text with the rest of your content', 'uk-cookie-consent' ); ?></p>
+			<p class="description"><?php _e( 'You can add an optional wrapper class, eg container, here to align the notification text with the rest of your content', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 
 		public function enqueue_styles_render() { 
 			$options = get_option( 'ctcc_styles_settings' ); ?>
 			<input type='checkbox'  name='ctcc_styles_settings[enqueue_styles]' <?php checked ( ! empty ( $options['enqueue_styles'] ), 1 ); ?> value='1'>
-			<p class="description"><?php _e ( 'Deselect this to dequeue the plugin stylesheet', 'uk-cookie-consent' ); ?></p>
+			<p class="description"><?php _e( 'Deselect this to dequeue the plugin stylesheet', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 
 		public function rounded_corners_render() { 
 			$options = get_option( 'ctcc_styles_settings' ); ?>
 			<input type='checkbox'  name='ctcc_styles_settings[rounded_corners]' <?php checked ( ! empty ( $options['rounded_corners'] ), 1 ); ?> value='1'>
-			<p class="description"><?php _e ( 'Round the corners on the block (doesn\'t apply to the top or bottom bar)', 'uk-cookie-consent' ); ?></p>
+			<p class="description"><?php _e( 'Round the corners on the block (doesn\'t apply to the top or bottom bar)', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 
 		public function drop_shadow_render() { 
 			$options = get_option( 'ctcc_styles_settings' ); ?>
 			<input type='checkbox'  name='ctcc_styles_settings[drop_shadow]' <?php checked ( ! empty ( $options['drop_shadow'] ), 1 ); ?> value='1'>
-			<p class="description"><?php _e ( 'Add drop shadow to the block (doesn\'t apply to the top or bottom bar)', 'uk-cookie-consent' ); ?></p>
+			<p class="description"><?php _e( 'Add drop shadow to the block (doesn\'t apply to the top or bottom bar)', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 
 		public function display_accept_with_text_render() { 
 			$options = get_option( 'ctcc_styles_settings' ); ?>
 			<input type='checkbox'  name='ctcc_styles_settings[display_accept_with_text]' <?php checked ( ! empty ( $options['display_accept_with_text'] ), 1 ); ?> value='1'>
-			<p class="description"><?php _e ( 'Display the confirmation button with notification text', 'uk-cookie-consent' ); ?></p>
+			<p class="description"><?php _e( 'Display the confirmation button with notification text', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 
 		public function x_close_render() { 
 			$options = get_option( 'ctcc_styles_settings' ); ?>
 			<input type='checkbox'  name='ctcc_styles_settings[x_close]' <?php checked ( ! empty ( $options['x_close'] ), 1 ); ?> value='1'>
-			<p class="description"><?php _e ( 'Remove confirmation button and use \'X\' icon instead', 'uk-cookie-consent' ); ?></p>
+			<p class="description"><?php _e( 'Remove confirmation button and use \'X\' icon instead', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 
 		public function text_color_render() { 
 			$options = get_option( 'ctcc_styles_settings' ); ?>
 			<input type="text" class="cctc-color-field" name="ctcc_styles_settings[text_color]" value="<?php echo esc_attr( $options['text_color'] ); ?>">
-			<p class="description"><?php _e ( 'The text color on the notification', 'uk-cookie-consent' ); ?></p>
+			<p class="description"><?php _e( 'The text color on the notification', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 		
 		public function bg_color_render() { 
 			$options = get_option( 'ctcc_styles_settings' ); ?>
 			<input type="text" class="cctc-color-field" name="ctcc_styles_settings[bg_color]" value="<?php echo esc_attr( $options['bg_color'] ); ?>">
-			<p class="description"><?php _e ( 'The background color for the notification', 'uk-cookie-consent' ); ?></p>
+			<p class="description"><?php _e( 'The background color for the notification', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 		
 		public function link_color_render() { 
 			$options = get_option( 'ctcc_styles_settings' ); ?>
 			<input type="text" class="cctc-color-field" name="ctcc_styles_settings[link_color]" value="<?php echo esc_attr( $options['link_color'] ); ?>">
-			<p class="description"><?php _e ( 'The link color on the notification', 'uk-cookie-consent' ); ?></p>
+			<p class="description"><?php _e( 'The link color on the notification', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 		
 		public function button_color_render() { 
 			$options = get_option( 'ctcc_styles_settings' ); ?>
 			<input type="text" class="cctc-color-field" name="ctcc_styles_settings[button_color]" value="<?php echo esc_attr( $options['button_color'] ); ?>">
-			<p class="description"><?php _e ( 'The text color on the notification button', 'uk-cookie-consent' ); ?></p>
+			<p class="description"><?php _e( 'The text color on the notification button', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 		
 		public function button_bg_color_render() { 
 			$options = get_option( 'ctcc_styles_settings' ); ?>
 			<input type="text" class="cctc-color-field" name="ctcc_styles_settings[button_bg_color]" value="<?php echo esc_attr( $options['button_bg_color'] ); ?>">
-			<p class="description"><?php _e ( 'The background color on the notification button', 'uk-cookie-consent' ); ?></p>
+			<p class="description"><?php _e( 'The background color on the notification button', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 		
 		public function flat_button_render() { 
 			$options = get_option( 'ctcc_styles_settings' ); ?>
 			<input type='checkbox'  name='ctcc_styles_settings[flat_button]' <?php checked ( ! empty ( $options['flat_button'] ), 1 ); ?> value='1'>
-			<p class="description"><?php _e ( 'Remove the border from the button', 'uk-cookie-consent' ); ?></p>
+			<p class="description"><?php _e( 'Remove the border from the button', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 		
 		public function enable_metafield_render() { 
 			$options = get_option( 'ctcc_options_settings' ); ?>
 			<input type='checkbox'  name='ctcc_options_settings[enable_metafield]' <?php checked ( ! empty ( $options['enable_metafield'] ), 1 ); ?> value='1'>
-			<p class="description"><?php _e ( 'Select this to enable a metafield on pages and posts. Checking the metafield on a page or post will exclude that page from displaying the notification.', 'uk-cookie-consent' ); ?></p>
+			<p class="description"><?php _e( 'Select this to enable a metafield on pages and posts. Checking the metafield on a page or post will exclude that page from displaying the notification.', 'uk-cookie-consent' ); ?></p>
 		<?php
 		}
 		
 		public function settings_section_callback() {
-			echo '<p>' .__( 'Basic settings', 'uk-cookie-consent' ) . '</p>';
+			echo '<p>' . __( 'Basic settings', 'uk-cookie-consent' ) . '</p>';
+			echo '<p><a href="http://iubenda.refr.cc/JKNZ55D" target="_blank">' . __( 'Create your own privacy policy here') . '</a></p>';
 		}
 		
 		public function content_settings_section_callback() { 
 			echo '<p>' .__( 'Update the content displayed to the user', 'uk-cookie-consent' ) . '</p>';
+			echo '<p><a href="http://iubenda.refr.cc/JKNZ55D" target="_blank">' . __( 'Create your own privacy policy here') . '</a></p>';
 		}
 				
 		public function styles_settings_section_callback() { 
 			echo '<p>' .__( 'Change the styles here if you like - but it\'s better in the Customizer', 'uk-cookie-consent' ) . '</p>';
+			echo '<p><a href="http://iubenda.refr.cc/JKNZ55D" target="_blank">' . __( 'Create your own privacy policy here') . '</a></p>';
 		}
 		
 		public function pages_settings_section_callback() { 
 			echo '<p>' . __( 'Use this section to set exclusion rules for pages and posts.', 'uk-cookie-consent' ) . '</p>';
+			echo '<p><a href="http://iubenda.refr.cc/JKNZ55D" target="_blank">' . __( 'Create your own privacy policy here') . '</a></p>';
 		}
 		
 		public function options_page() {
@@ -724,7 +756,7 @@ if ( ! class_exists ( 'CTCC_Admin' ) ) {
 						</form>
 						<form method="post" action="">
 							<p class="submit">
-								<input name="reset" class="button button-secondary" type="submit" value="<?php _e ( 'Reset plugin defaults', 'uk-cookie-consent' ); ?>" >
+								<input name="reset" class="button button-secondary" type="submit" value="<?php _e( 'Reset plugin defaults', 'uk-cookie-consent' ); ?>" >
 								<input type="hidden" name="action" value="reset" />
 							</p>
 						</form>

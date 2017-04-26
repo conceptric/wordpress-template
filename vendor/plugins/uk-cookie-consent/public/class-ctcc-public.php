@@ -24,10 +24,25 @@ if ( ! class_exists( 'CTCC_Public' ) ) { // Don't initialise if there's already 
 		 * @since 2.0.0		
 		 */
 		public function init() {
+			add_filter( 'body_class', array ( $this, 'body_class' ) );
 			add_action ( 'wp_enqueue_scripts', array ( $this, 'enqueue_scripts' ) );
 			add_action ( 'wp_head', array ( $this, 'add_css' ) );
 			add_action ( 'wp_footer', array ( $this, 'add_js' ), 1000 );
 			add_action ( 'wp_footer', array ( $this, 'add_notification_bar' ), 1000 );
+		}
+		
+		/*		
+		 * Initialize the class and start calling our hooks and filters		
+		 * @since 2.0.0		
+		 */
+		public function body_class( $classes ) {
+			$options = get_option( 'ctcc_options_settings' );
+			if( isset( $options['exclude_zones'] ) && is_array( $options['exclude_zones'] ) ) {
+				foreach( $options['exclude_zones'] as $zone ) {
+					$classes[] = 'ctcc-exclude-' . $zone;
+				}
+			}
+			return $classes;
 		}
 		
 		/*
@@ -41,9 +56,9 @@ if ( ! class_exists( 'CTCC_Public' ) ) { // Don't initialise if there's already 
 				$ctcc_options_settings = get_option ( 'ctcc_options_settings' );
 				$options = get_option ( 'ctcc_styles_settings' );
 				if ( isset ( $options['enqueue_styles'] ) ) {
-					wp_enqueue_style ( 'cookie-consent-style', CTCC_PLUGIN_URL . 'assets/css/style.css', '2.0.0' );
+					wp_enqueue_style ( 'cookie-consent-style', CTCC_PLUGIN_URL . 'assets/css/style.css', '2.3.0' );
 				}
-				wp_enqueue_script ( 'cookie-consent', CTCC_PLUGIN_URL . 'assets/js/uk-cookie-consent-js.js', array ( 'jquery' ), '2.2.5', true );
+				wp_enqueue_script ( 'cookie-consent', CTCC_PLUGIN_URL . 'assets/js/uk-cookie-consent-js.js', array ( 'jquery' ), '2.3.0', true );
 				wp_localize_script (
 					'cookie-consent',
 					'ctcc_vars',
