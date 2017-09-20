@@ -330,8 +330,13 @@ if ( ! class_exists( 'CTCC_Public' ) ) { // Don't initialise if there's already 
 						// Check the absolute URL first
 						$link = $ctcc_content_settings['more_info_url'];
 					} else {
+						// Make sure, we get the right page translation, using PolyLang, if pll_get_post function exists
+						$page_id = $ctcc_content_settings['more_info_page'];
+						if( function_exists( 'pll_get_post' ) ) {
+							$page_id = pll_get_post( $page_id );
+						}
 						// Use the internal page
-						$link = get_permalink ( $ctcc_content_settings['more_info_page'] );
+						$link = get_permalink( $page_id );
 					}
 					$more_info_text = wp_kses ( $ctcc_content_settings['more_info_text'], $allowed );
 					$more_info_text = apply_filters( 'ctcc_more_info_text', $more_info_text );

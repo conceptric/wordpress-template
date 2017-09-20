@@ -32,6 +32,17 @@ if ( ! class_exists ( 'CTCC_Admin' ) ) {
 			add_action ( 'admin_enqueue_scripts', array ( $this, 'enqueue_scripts' ) );
 			add_action ( 'admin_footer', array ( $this, 'add_js' ) );
 			
+			add_action( 'admin_init', array( $this, 'save_registered_setting' ) );
+			
+		}
+		
+		/**
+		 * We save this artificially to let the tracker know that we're allowed to export this option's data
+		 */
+		public function save_registered_setting() {
+			$options = get_option( 'ctcc_options_settings' );
+			$options['wisdom_registered_setting'] = 1;
+			update_option( 'ctcc_options_settings', $options );
 		}
 
 		public function enqueue_scripts() {
@@ -128,6 +139,14 @@ if ( ! class_exists ( 'CTCC_Admin' ) ) {
 				'cookie_version', 
 				__( 'Cookie Version', 'uk-cookie-consent' ), 
 				array ( $this, 'cookie_version_render' ),
+				'ctcc_options', 
+				'ctcc_options_section'
+			);
+			
+			add_settings_field ( 
+				'wisdom_opt_out', 
+				__( 'Opt out of tracking', 'uk-cookie-consent' ), 
+				array ( $this, 'opt_out_render' ),
 				'ctcc_options', 
 				'ctcc_options_section'
 			);
@@ -524,6 +543,13 @@ if ( ! class_exists ( 'CTCC_Admin' ) ) {
 		<?php
 		}
 		
+		public function opt_out_render() { 
+			$options = get_option( 'ctcc_options_settings' ); ?>
+			<input type='checkbox' name='ctcc_options_settings[wisdom_opt_out]' <?php checked ( ! empty ( $options['wisdom_opt_out'] ), 1 ); ?> value='1'>
+			<p class="description"><?php _e( 'If you previously opted into allowing this plugin to track non-sensitive data, you can opt out here', 'uk-cookie-consent' ); ?></p>
+		<?php
+		}
+		
 		/*
 		 * Content renders
 		 */
@@ -763,18 +789,18 @@ if ( ! class_exists ( 'CTCC_Admin' ) ) {
 					</div><!-- .ctdb-inner-wrap -->
 					
 					<div class="ctdb-banners">
+						<div class="ctdb-banner">
+							<a href="https://catapultthemes.com/downloads/showcase/?utm_source=plugin_ad&utm_medium=wp_plugin&utm_content=cookieconsent&utm_campaign=themes"><img src="<?php echo CTCC_PLUGIN_URL . 'assets/images/showcase-banner-ad.jpg'; ?>" alt="" ></a>
+						</div>
 						<div class="ctdb-banner hide-dbpro">
-							<a href="http://discussionboard.pro/?utm_source=plugin_ad&utm_medium=wp_plugin&utm_content=cookieconsent&utm_campaign=dbpro"><img src="<?php echo CTCC_PLUGIN_URL . 'assets/images/dbpro-ad-view.png'; ?>" alt="" ></a>
+							<a href="https://discussionboard.pro/?utm_source=plugin_ad&utm_medium=wp_plugin&utm_content=cookieconsent&utm_campaign=dbpro"><img src="<?php echo CTCC_PLUGIN_URL . 'assets/images/dbpro-ad-view.png'; ?>" alt="" ></a>
+						</div>
+						<div class="ctdb-banner">
+							<a href="https://catapultthemes.com/downloads/sliderify-pro/?utm_source=plugin_ad&utm_medium=wp_plugin&utm_content=cookieconsent&utm_campaign=themes"><img src="<?php echo CTCC_PLUGIN_URL . 'assets/images/mgs-banner-ad.png'; ?>" alt="" ></a>
 						</div>
 						<div class="ctdb-banner">
 							<a href="http://superheroslider.catapultthemes.com/?utm_source=plugin_ad&utm_medium=wp_plugin&utm_content=cookieconsent&utm_campaign=superhero"><img src="<?php echo CTCC_PLUGIN_URL . 'assets/images/superhero-ad1.png'; ?>" alt="" ></a>
-						</div>
-						<div class="ctdb-banner">
-							<a href="https://sellastic.com/?ref=1&utm_source=plugin_ad&utm_medium=wp_plugin&utm_content=cookieconsent&utm_campaign=sellastic"><img src="<?php echo CTCC_PLUGIN_URL . 'assets/images/sellastic-ad1.jpg'; ?>" alt="" ></a>
 						</div>	
-						<div class="ctdb-banner">
-							<a href="http://mode.catapultthemes.com/?utm_source=plugin_ad&utm_medium=wp_plugin&utm_content=cookieconsent&utm_campaign=themes"><img src="<?php echo CTCC_PLUGIN_URL . 'assets/images/themes-ad1.png'; ?>" alt="" ></a>
-						</div>			
 					</div>
 					
 				</div><!-- .ctdb-outer-wrap -->

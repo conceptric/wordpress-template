@@ -2,7 +2,7 @@
 /**
  * This is the class that sends all the data back to the home site
  * It also handles opting in and deactivation
- * @version 1.0.1
+ * @version 1.1.1
  */
 
 // Exit if accessed directly
@@ -14,7 +14,7 @@ if( ! class_exists( 'Plugin_Usage_Tracker') ) {
 	
 	class Plugin_Usage_Tracker {
 		
-		private $wisdom_version = '1.0.0';
+		private $wisdom_version = '1.1.1';
 		private $home_url = '';
 		private $plugin_file = '';
 		private $plugin_name = '';
@@ -77,8 +77,8 @@ if( ! class_exists( 'Plugin_Usage_Tracker') ) {
 				$this->do_tracking();
 			}
 
-			// Hook our do_tracking function to the weekly action
-			add_filter( 'cron_schedules', array( $this, 'add_weekly_cron_schedule' ) );
+			// Hook our do_tracking function to the daily action
+			// add_filter( 'cron_schedules', array( $this, 'add_weekly_cron_schedule' ) );
 			add_action( 'put_do_weekly_action', array( $this, 'do_tracking' ) );
 
 			// Use this action for local testing
@@ -116,8 +116,9 @@ if( ! class_exists( 'Plugin_Usage_Tracker') ) {
 		 * @since 1.0.0
 		 */
 		public function schedule_tracking() {
+			// For historical reasons, this is called 'weekly' but is in fact daily
 			if ( ! wp_next_scheduled( 'put_do_weekly_action' ) ) {
-				wp_schedule_event( time(), 'weekly', 'put_do_weekly_action' );
+				wp_schedule_event( time(), 'daily', 'put_do_weekly_action' );
 			}
 			// Run tracking here in case plugin has been reactivated
 			$this->do_tracking();
@@ -140,6 +141,12 @@ if( ! class_exists( 'Plugin_Usage_Tracker') ) {
 			// Check to see if the user has opted in to tracking
 			$allow_tracking = $this->get_is_tracking_allowed();
 			if( ! $allow_tracking ) {
+				return;
+			}
+			
+			// Check to see if it's time to track
+			$track_time = $this->get_is_time_to_track();
+			if( ! $track_time ) {
 				return;
 			}
 	
@@ -170,6 +177,8 @@ if( ! class_exists( 'Plugin_Usage_Tracker') ) {
 					'user-agent'  => 'PUT/1.0.0; ' . get_bloginfo( 'url' )
 				)
 			);
+			
+			$this->set_track_time();
 	
 			if( is_wp_error( $request ) ) {
 				return $request;
@@ -226,11 +235,15 @@ if( ! class_exists( 'Plugin_Usage_Tracker') ) {
 
 			$body['active_plugins'] = $active_plugins;
 			$body['inactive_plugins'] = $plugins;
-	
+
 			// Check text direction
 			$body['text_direction']	= 'LTR';
-			if( is_rtl() ) {
-				$body['text_direction']	= 'RTL';
+			if( function_exists( 'is_rtl' ) ) {
+				if( is_rtl() ) {
+					$body['text_direction']	= 'RTL';
+				}
+			} else {
+				$body['text_direction']	= 'not set';
 			}
 	
 			/**
@@ -331,7 +344,7 @@ if( ! class_exists( 'Plugin_Usage_Tracker') ) {
 			
 			$this->send_data( $body );
 			// Clear scheduled update
-			wp_clear_scheduled_hook( 'wisdom_do_weekly_action' );
+			wp_clear_scheduled_hook( 'put_do_weekly_action' );
 		}
 		
 		/**
@@ -339,6 +352,11 @@ if( ! class_exists( 'Plugin_Usage_Tracker') ) {
 		 * @since 1.0.0
 		 */
 		public function get_is_tracking_allowed() {
+			// First, check if the user has changed their mind and opted out of tracking
+			if( $this->has_user_opted_out() ) {
+				$this->set_is_tracking_allowed( false, $this->plugin_name );
+				return false;
+			}
 			// The wisdom_allow_tracking option is an array of plugins that are being tracked
 			$allow_tracking = get_option( 'wisdom_allow_tracking' );
 			// If this plugin is in the array, then tracking is allowed
@@ -361,8 +379,14 @@ if( ! class_exists( 'Plugin_Usage_Tracker') ) {
 			}
 			// The wisdom_allow_tracking option is an array of plugins that are being tracked
 			$allow_tracking = get_option( 'wisdom_allow_tracking' );
-			// If the user has agreed to allow tracking or if opt-in is not required
-			if( $is_allowed || ! $this->require_optin ) {
+			
+			// If the user has decided to opt out
+			if( $this->has_user_opted_out() ) {
+				if( isset( $allow_tracking[$plugin] ) ) {
+					unset( $allow_tracking[$plugin] );
+				}
+			} else if( $is_allowed || ! $this->require_optin ) {
+				// If the user has agreed to allow tracking or if opt-in is not required
 				if( empty( $allow_tracking ) || ! is_array( $allow_tracking ) ) {
 					// If nothing exists in the option yet, start a new array with the plugin name
 					$allow_tracking = array( $plugin => $plugin );
@@ -376,6 +400,57 @@ if( ! class_exists( 'Plugin_Usage_Tracker') ) {
 				}
 			}
 			update_option( 'wisdom_allow_tracking', $allow_tracking );
+		}
+		
+		/**
+		 * Has the user opted out of allowing tracking?
+		 * @since 1.1.0
+		 * @return Boolean
+		 */
+		public function has_user_opted_out() {
+			// Iterate through the options that are being tracked looking for wisdom_opt_out setting
+			if( ! empty( $this->options ) ) {
+				foreach( $this->options as $option_name ) {
+					// Check each option
+					$options = get_option( $option_name );
+					// If we find the setting, return true
+					if( ! empty( $options['wisdom_opt_out'] ) ) {
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+		
+		/**
+		 * Check if it's time to track
+		 * @since 1.1.1
+		 */
+		public function get_is_time_to_track() {
+			// Let's see if we're due to track this plugin yet
+			$track_times = get_option( 'wisdom_last_track_time', array() );
+			if( ! isset( $track_times[$this->plugin_name] ) ) {
+				// If we haven't set a time for this plugin yet, then we must track it
+				return true;
+			} else {
+				// If the time is set, let's see if it's more than a day ago
+				if( $track_times[$this->plugin_name] < strtotime( '-1 day' ) ) {
+					return true;
+				}
+			}
+			return false;
+		}
+		
+		/**
+		 * Record the time we send tracking data
+		 * @since 1.1.1
+		 */
+		public function set_track_time() {
+			// We've tracked, so record the time
+			$track_times = get_option( 'wisdom_last_track_time', array() );
+			// Set different times according to plugin, in case we are tracking multiple plugins
+			$track_times[$this->plugin_name] = time();
+			update_option( 'wisdom_last_track_time', $track_times );
 		}
 		
 		/**
@@ -704,7 +779,7 @@ if( ! class_exists( 'Plugin_Usage_Tracker') ) {
 						var url = document.getElementById("put-goodbye-link-<?php echo esc_attr( $this->plugin_name ); ?>");
 						$('body').toggleClass('put-form-active');
 						$("#put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?>").fadeIn();
-						$("#put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?>").html( '<?php echo $html; ?>' + '<div class="put-goodbye-form-footer"><p><a id="put-submit-form" class="button primary" href="#"><?php __( 'Submit and Deactivate', 'plugin-usage-tracker' ); ?></a>&nbsp;<a class="secondary button" href="'+url+'"><?php __( 'Just Deactivate', 'plugin-usage-tracker' ); ?></a></p></div>');
+						$("#put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?>").html( '<?php echo $html; ?>' + '<div class="put-goodbye-form-footer"><p><a id="put-submit-form" class="button primary" href="#"><?php _e( 'Submit and Deactivate', 'plugin-usage-tracker' ); ?></a>&nbsp;<a class="secondary button" href="'+url+'"><?php _e( 'Just Deactivate', 'plugin-usage-tracker' ); ?></a></p></div>');
 						$('#put-submit-form').on('click', function(e){
 							// As soon as we click, the body of the form should disappear
 							$("#put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?> .put-goodbye-form-body").fadeOut();

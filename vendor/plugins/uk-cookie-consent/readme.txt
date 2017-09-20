@@ -3,8 +3,8 @@ Contributors: Catapult_Themes, husobj, jraczynski
 Donate Link: https://www.paypal.me/catapultthemes
 Tags: cookie law, cookies, eu cookie law, eu privacy directive, cookie compliance, cookie law, cookie notice, cookie notification, wpml, geo ip
 Requires at least: 4.3
-Tested up to: 4.7.3
-Stable tag: 2.3.2
+Tested up to: 4.8
+Stable tag: 2.3.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 The only cookie consent plugin you'll ever need.
@@ -70,6 +70,14 @@ You will find more details of the regulations on the [Information Commissioner's
 5. Example settings page
 
 == Changelog ==
+
+= 2.3.4 =
+* Updated: minor admin error
+
+= 2.3.3 =
+* Added: Polylang support for more_info setting
+* Added: setting to opt out of tracking
+* Updated: tracking class
 
 = 2.3.2 =
 * Updated: incorrect text domains

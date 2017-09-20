@@ -3,7 +3,7 @@
 Plugin Name: Cookie Consent
 Plugin URI: http://catapultthemes.com/cookie-consent/
 Description: The only cookie consent plugin you'll ever need.
-Version: 2.3.2
+Version: 2.3.4
 Author: Catapult_Themes
 Author URI: http://catapultthemes.com/
 Text Domain: uk-cookie-consent
@@ -89,7 +89,7 @@ if( ! function_exists( 'uk_cookie_consent_start_plugin_tracking' ) ) {
 		$wisdom = new Plugin_Usage_Tracker(
 			__FILE__,
 			'https://wisdomplugin.com',
-			array(),
+			array( 'ctcc_options_settings' ),
 			true,
 			true,
 			1
