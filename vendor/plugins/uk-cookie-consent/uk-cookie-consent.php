@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Cookie Consent
-Plugin URI: http://catapultthemes.com/cookie-consent/
+Plugin URI: https://catapultthemes.com/cookie-consent/
 Description: The only cookie consent plugin you'll ever need.
-Version: 2.3.4
+Version: 2.3.7
 Author: Catapult_Themes
-Author URI: http://catapultthemes.com/
+Author URI: https://catapultthemes.com/
 Text Domain: uk-cookie-consent
 Domain Path: /languages
 */

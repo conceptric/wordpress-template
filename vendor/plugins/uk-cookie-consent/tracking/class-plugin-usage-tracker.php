@@ -2,7 +2,7 @@
 /**
  * This is the class that sends all the data back to the home site
  * It also handles opting in and deactivation
- * @version 1.1.1
+ * @version 1.1.2
  */
 
 // Exit if accessed directly
@@ -10,11 +10,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+
 if( ! class_exists( 'Plugin_Usage_Tracker') ) {
 	
 	class Plugin_Usage_Tracker {
 		
-		private $wisdom_version = '1.1.1';
+		private $wisdom_version = '1.1.2';
 		private $home_url = '';
 		private $plugin_file = '';
 		private $plugin_name = '';
@@ -72,13 +73,13 @@ if( ! class_exists( 'Plugin_Usage_Tracker') ) {
 			// Check whether opt-in is required
 			// If not, then tracking is allowed
 			if( ! $this->require_optin ) {
+				$this->set_can_collect_email( true, $this->plugin_name );
 				$this->set_is_tracking_allowed( true );
 				$this->update_block_notice();
-				$this->do_tracking();
+				$this->do_tracking( true );
 			}
 
 			// Hook our do_tracking function to the daily action
-			// add_filter( 'cron_schedules', array( $this, 'add_weekly_cron_schedule' ) );
 			add_action( 'put_do_weekly_action', array( $this, 'do_tracking' ) );
 
 			// Use this action for local testing
@@ -96,19 +97,6 @@ if( ! class_exists( 'Plugin_Usage_Tracker') ) {
 		}
 		
 		/**
-		 * Add weekly option to the cron schedule
-		 *
-		 * @since 1.1.2
-		 */
-		public function add_weekly_cron_schedule( $schedules ) {
-			$schedules['weekly'] = array(
-				'interval'	=> 604800,
-				'display'	=> __( 'Once weekly', 'put-usage-tracker' )
-			);
-			return $schedules;
-		}
-		
-		/**
 		 * When the plugin is activated
 		 * Create scheduled event
 		 * And check if tracking is enabled - perhaps the plugin has been reactivated
@@ -120,8 +108,6 @@ if( ! class_exists( 'Plugin_Usage_Tracker') ) {
 			if ( ! wp_next_scheduled( 'put_do_weekly_action' ) ) {
 				wp_schedule_event( time(), 'daily', 'put_do_weekly_action' );
 			}
-			// Run tracking here in case plugin has been reactivated
-			$this->do_tracking();
 		}
 		
 		/**
@@ -131,8 +117,9 @@ if( ! class_exists( 'Plugin_Usage_Tracker') ) {
 		 * Then send it back
 		 *
 		 * @since 1.0.0
+		 * @param $force	Force tracking if it's not time
 		 */
-		public function do_tracking() {
+		public function do_tracking( $force=false ) {
 			// If the home site hasn't been defined, we just drop out. Nothing much we can do.
 			if ( ! $this->home_url ) {
 				return;
@@ -146,9 +133,11 @@ if( ! class_exists( 'Plugin_Usage_Tracker') ) {
 			
 			// Check to see if it's time to track
 			$track_time = $this->get_is_time_to_track();
-			if( ! $track_time ) {
+			if( ! $track_time && ! $force ) {
 				return;
 			}
+			
+			$this->set_admin_email();
 	
 			// Get our data
 			$body = $this->get_data();
@@ -212,7 +201,7 @@ if( ! class_exists( 'Plugin_Usage_Tracker') ) {
 			
 			// Collect the email if the correct option has been set
 			if( $this->get_can_collect_email() ) {
-				$body['email'] = get_bloginfo( 'admin_email' );
+				$body['email'] = $this->get_admin_email();
 			}
 			$body['marketing_method'] = $this->marketing;
 	
@@ -518,6 +507,53 @@ if( ! class_exists( 'Plugin_Usage_Tracker') ) {
 		}
 		
 		/**
+		 * Get the correct email address to use
+		 * @since 1.1.2
+		 * @return Email address
+		 */
+		public function get_admin_email() {
+			// The wisdom_collect_email option is an array of plugins that are being tracked
+			$email = get_option( 'wisdom_admin_emails' );
+			// If this plugin is in the array, then we can collect the email address
+			if( isset( $email[$this->plugin_name] ) ) {
+				return $email[$this->plugin_name];
+			}
+			return false;
+		}
+		
+		/**
+		 * Set the correct email address to use
+		 * There might be more than one admin on the site
+		 * So we only use the first admin's email address
+		 * @param $email	Email address to set
+		 * @param $plugin	Plugin name to set email address for
+		 * @since 1.1.2
+		 */
+		public function set_admin_email( $email=null, $plugin=null ) {
+			if( empty( $plugin ) ) {
+				$plugin = $this->plugin_name;
+			}
+			// If no email address passed, try to get the current user's email
+			if( empty( $email ) ) {
+				// Have to check that current user object is available
+				if( function_exists( 'wp_get_current_user' ) ) {
+					$current_user = wp_get_current_user();
+					$email = $current_user->user_email;
+				}
+			}
+			// The wisdom_admin_emails option is an array of admin email addresses
+			$admin_emails = get_option( 'wisdom_admin_emails' );
+			if( empty( $admin_emails ) || ! is_array( $admin_emails ) ) {
+				// If nothing exists in the option yet, start a new array with the plugin name
+				$admin_emails = array( $plugin => sanitize_email( $email ) );
+			} else if( empty( $admin_emails[$plugin] ) ) {
+				// Else add the email address to the array, if not already set
+				$admin_emails[$plugin] = sanitize_email( $email );
+			}
+			update_option( 'wisdom_admin_emails', $admin_emails );
+		}
+		
+		/**
 		 * Display the admin notice to users to allow them to opt in
 		 *
 		 * @since 1.0.0
@@ -529,7 +565,7 @@ if( ! class_exists( 'Plugin_Usage_Tracker') ) {
 				$action = sanitize_text_field( $_GET['plugin_action'] );
 				if( $action == 'yes' ) {
 					$this->set_is_tracking_allowed( true, $plugin );
-					$this->do_tracking(); // Run this straightaway
+					$this->do_tracking( true ); // Run this straightaway
 				} else {
 					$this->set_is_tracking_allowed( false, $plugin );
 				}
@@ -614,7 +650,7 @@ if( ! class_exists( 'Plugin_Usage_Tracker') ) {
 				// Set marketing optin
 				$this->set_can_collect_email( sanitize_text_field( $_GET['marketing_optin'] ), $this->plugin_name );
 				// Do tracking
-				$this->do_tracking();
+				$this->do_tracking( true );
 			} else if( isset( $_GET['marketing'] ) && $_GET['marketing']=='yes' ) {
 				// Display the notice requesting permission to collect email address
 				// Retrieve current plugin information
