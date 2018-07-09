@@ -1,10 +1,10 @@
 === Cookie Consent ===
 Contributors: Catapult_Themes, husobj, jraczynski
 Donate Link: https://www.paypal.me/catapultthemes
-Tags: cookie law, cookies, eu cookie law, eu privacy directive, cookie compliance, cookie law, cookie notice, cookie notification, wpml, geo ip
+Tags: cookie law, cookies, gdpr, eu privacy directive, cookie compliance, cookie law, cookie notice, cookie notification, wpml, geo ip
 Requires at least: 4.3
-Tested up to: 4.9.3
-Stable tag: 2.3.9
+Tested up to: 4.9.6
+Stable tag: 2.3.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 The only cookie consent plugin you'll ever need.
@@ -70,6 +70,13 @@ You will find more details of the regulations on the [Information Commissioner's
 5. Example settings page
 
 == Changelog ==
+
+= 2.3.11 =
+* Added: activation notice
+* Fixed: removed additional body margin for hidden bar
+
+= 2.3.10 =
+* Fixed: fixed security vulnerability identified by James Boughey
 
 = 2.3.9 =
 * Updated: removed tracking
