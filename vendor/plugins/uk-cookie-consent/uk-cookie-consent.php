@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Cookie Consent
-Plugin URI: https://catapultthemes.com/cookie-consent/
+Plugin URI: https://termly.io/products/
 Description: The only cookie consent plugin you'll ever need.
-Version: 2.3.11
-Author: Catapult_Themes
-Author URI: https://catapultthemes.com/
+Version: 2.3.12
+Author: davidtaroko
+Author URI: https://termly.io/
 Text Domain: uk-cookie-consent
 Domain Path: /languages
 */
