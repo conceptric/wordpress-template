@@ -1,10 +1,10 @@
 <?php
 /*
-Plugin Name: Cookie Consent
+Plugin Name: GDPR Cookie Consent Banner
 Plugin URI: https://termly.io/products/
-Description: The only cookie consent plugin you'll ever need.
-Version: 2.3.12
-Author: davidtaroko
+Description: Our easy to use cookie consent plugin can assist in your GDPR and ePrivacy Directive compliance efforts.
+Version: 2.3.14
+Author: termly
 Author URI: https://termly.io/
 Text Domain: uk-cookie-consent
 Domain Path: /languages
@@ -88,8 +88,8 @@ function ctcc_admin_notice() {
 		printf(
 			'<div class="notice notice-info"><p><strong>%s</strong></p><p>%s</p><p><a href="%s" class="button button-primary">%s</a></p><p><a href="%s">%s</a></p></div>',
 			__( 'Cookie Consent and GDPR', 'ctcc' ),
-			__( 'Do you need help with making your site compliant with GDPR? Iubenda provide attorney-level solutions to help with your legal requirements, including generating privacy and cookie policies that are automatically updated if the law changes.', 'ctcc' ),
-			'http://iubenda.refr.cc/JKNZ55D',
+			__( 'Do you need help with making your site compliant with the GDPR? Termly provides attorney-level solutions to help with your legal requirements, including generating privacy and cookie policies that are automatically updated when laws and regulations change.', 'ctcc' ),
+			'https://termly.io/products/privacy-policy-generator/?utm_source=Wordpress%20Plugin&utm_medium=privacy%20policy%20link',
 			__( 'Find Out More', 'ctcc' ),
 			esc_url( $url ),
 			__( 'No Thanks', 'ctcc' )
