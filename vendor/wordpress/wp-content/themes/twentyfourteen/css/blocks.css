@@ -1,6 +1,6 @@
 /*
 Theme Name: Twenty Fourteen
-Description: Used to style Gutenberg Blocks.
+Description: Used to style blocks.
 */
 
 /*--------------------------------------------------------------
@@ -139,7 +139,6 @@ p.has-drop-cap:not(:focus)::first-letter {
 .wp-block-file .wp-block-file__button {
 	background-color: #24890d;
 	border: 0;
-	border-radius: 2px;
 	color: #fff;
 	font-size: 12px;
 	font-weight: 700;
@@ -221,24 +220,33 @@ p.has-drop-cap:not(:focus)::first-letter {
 /* Buttons */
 
 .wp-block-button .wp-block-button__link {
-	background-color: #24890d;
-	border: 0;
-	border-radius: 2px;
-	color: #fff;
 	font-size: 12px;
 	font-weight: 700;
 	line-height: 15px;
 	padding: 10px 30px 11px;
+	text-decoration: none;
 	text-transform: uppercase;
 	vertical-align: bottom;
 }
 
-.wp-block-button .wp-block-button__link:hover,
-.wp-block-button .wp-block-button__link:focus {
-	background-color: #41a62a;
+.wp-block-button__link {
+	background-color: #24890d;
+	color: #fff;
 }
 
-.wp-block-button .wp-block-button__link:active {
+.is-style-outline .wp-block-button__link:not(.has-text-color) {
+	color: #24890d;
+}
+
+.wp-block-button__link:hover,
+.wp-block-button__link:focus,
+.is-style-outline .wp-block-button__link:not(.has-text-color):hover,
+.is-style-outline .wp-block-button__link:not(.has-text-color):focus {
+	background-color: #41a62a;
+	color: #fff;
+}
+
+.wp-block-button__link:active {
 	background-color: #55d737;
 }
 
