@@ -2,10 +2,10 @@
 Contributors: wpecommerce, wp.insider, alexanderfoxc
 Donate link: https://wp-ecommerce.net/easy-wordpress-smtp-send-emails-from-your-wordpress-site-using-a-smtp-server-2197
 Tags: mail, wordpress smtp, phpmailer, smtp, wp_mail, email, gmail, outgoing mail, privacy, security, sendmail, ssl, tls, wp-phpmailer, mail smtp, wp smtp
-Requires at least: 4.3
-Tested up to: 5.5
+Requires at least: 5.0
+Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 1.4.1
+Stable tag: 1.4.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -79,6 +79,24 @@ Inspired by [WP Mail SMTP](http://wordpress.org/plugins/wp-mail-smtp/) plugin
 
 == Changelog ==
 
+= 1.4.6 =
+* Fixed a typo in the description of a settings option.
+
+= 1.4.5 =
+* Made another change to the debug logging functionality to only output the email header (instead of the full email).
+* We understand that having the full email in the log file (when debug logging is enabled) to do troubleshooting is helpful but some users can forget to disable the logging feature afterwards. This change was necessary to ensure that sensitive info cannot be exposed unintentionally in the future.
+
+= 1.4.4 =
+* Debug log is now reset when plugin is activated or deactivated.
+* Debug log file is now in the `logs` folder and is hidden (it's name starts with `.`). It is additionally protected from public access by the .htaccess file. Thanks to @mathieg2, @burkingman and @shadowdao for their reports and input.
+* Added `swpsmtp_log_file_path_override` filter that can be used to override debug log file location.
+
+= 1.4.3 =
+* Added empty "index.html" file to this plugin's folder to prevent anyone from browsing the files (even if the Option -Indexes is missing on that server).
+
+= 1.4.2 =
+* Improved compatibility for sites using older version of PHP and WP5.5+
+
 = 1.4.1 =
 * Added an option to specify BCC email address for the outgoing emails.
 
@@ -143,7 +161,7 @@ Inspired by [WP Mail SMTP](http://wordpress.org/plugins/wp-mail-smtp/) plugin
 * The plugin is no longer failing if PHP mbstring extension is not installed on the server.
 * Settings page is using tabs now.
 * Fixed default settings were not set upon plugin activation.
-* Fixed some lines that couldn't be translated to other languages (thanks to jranavas).
+* Fixed some lines that couldn't be translated to other languages.
 
 = 1.3.1 =
 * Fixed potential issue with passwords that had special characters.
@@ -253,6 +271,3 @@ Inspired by [WP Mail SMTP](http://wordpress.org/plugins/wp-mail-smtp/) plugin
 
 = 1.0.1 =
 * First commit of the plugin
-
-== Upgrade Notice ==
-Upgrade to 1.3.9.2 is highly recommended as it adds additional CSRF protection for some admin-side functions.
