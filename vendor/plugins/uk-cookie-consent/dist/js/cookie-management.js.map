@@ -1,0 +1,1 @@
+{"version":3,"sources":["js/cookie-management.js"],"names":["$","window","jQuery"],"mappings":";AAIA,IAAMA,EAAIC,OAAOC","file":"cookie-management.js","sourceRoot":"../src","sourcesContent":["//\n// Handles filtering\n//\n\nconst $ = window.jQuery;\n"]}

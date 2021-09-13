@@ -1,0 +1,1045 @@
+@charset "UTF-8";
+
+/* Termly Logo Font */
+@font-face {
+	font-family: "termly";
+	src:url("../fonts/termly.eot");
+	src:url("../fonts/termly.eot?#iefix") format("embedded-opentype"),
+		url("../fonts/termly.woff") format("woff"),
+		url("../fonts/termly.ttf") format("truetype"),
+		url("../fonts/termly.svg#termly") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+
+#toplevel_page_termly div.wp-menu-image img {
+	display: none;
+}
+#toplevel_page_termly div.wp-menu-image:before {
+	content: 't';
+	font-family: 'termly' !important;
+}
+
+// Header
+.termly-content-header {
+	align-items: center;
+	border-bottom: 1px solid $color_gray;
+	display: flex;
+	flex-wrap: wrap;
+	padding: 10px 20px;
+
+	> * {
+		padding: 10px 0;
+	}
+
+	> svg {
+		height: 35px;
+		width: 35px;
+	}
+
+	h1 {
+		font-size: 1.4rem;
+		font-weight: bold;
+		margin: 0 0 0 14px;
+		padding: 0;
+	}
+
+	.page-title-action {
+		@include primary-button;
+		align-items: center;
+		display: flex;
+		font-weight: 400;
+		margin: 0 0 0 20px;
+		position: static;
+
+		&:active,
+		&:focus,
+		&:hover {
+			@include primary-button;
+			font-weight: 400;
+			margin: 0 0 0 20px;
+			position: static;
+		}
+
+		svg {
+			margin-right: 8px;
+		}
+
+		&.scan-now {
+
+			svg {
+				height: 18px;
+				width: 18px;
+			}
+		}
+
+		&.new-cookie {
+
+			svg {
+				height: 12px;
+				width: 12px;
+			}
+		}
+	}
+
+	.termly-dashboard-link-container {
+		flex-grow: 1;
+		text-align: right;
+
+		a {
+			color: $color_primary;
+			font-size: 1rem;
+			text-decoration: none;
+
+			span {
+				font-weight: 500;
+			}
+
+			svg {
+				margin-left: 12px;
+				height: 13px;
+				width: 10px;
+			}
+		}
+	}
+}
+
+// Termly Logo
+.termly:not(.wp-list-table) {
+
+	padding-top: 10px;
+
+	.submit {
+		margin-top: 0;
+
+		input[type=submit],
+		button,
+		a {
+			@include primary-button;
+
+			&:active,
+			&:focus,
+			&:hover {
+				@include primary-button;
+			}
+		}
+	}
+
+	.termly-left-column {
+		background-color: $color_white;
+		box-shadow: 0 0 10px rgba(0,0,0,0.1);
+		margin-top: 20px;
+		width: 100%;
+
+		.content {
+			padding: 30px 40px 0;
+		}
+
+	}
+
+	.banner,
+	.notice {
+		margin: 10px 40px;
+		padding: 6px 12px;
+
+		&.notice-warning,
+		&.notice-success,
+		&.notice-error {
+			background-color: #fffcf1;
+			border: 2px solid #faeeda;
+			border-radius: 5px;
+			margin: 10px 20px;
+			position: relative;
+			width: auto;
+
+			&:before {
+				background-image: url('../images/alert.png');
+				background-position: left center;
+				background-repeat: no-repeat;
+				content: '';
+				height: 14px;
+				left: 15px;
+				position: absolute;
+				top: 13px;
+				width: 14px;
+			}
+
+			p {
+				padding-left: 28px;
+			}
+		}
+
+		&.notice-success {
+			background-color: #f5fff5;
+			border-color: #e6f8e6;
+
+			&:before {
+				background-image: url('../images/success.png');
+				height: 16px;
+				left: 15px;
+				top: 13px;
+				width: 16px;
+			}
+
+			p {
+				padding-left: 28px;
+			}
+		}
+
+		&.notice-error {
+			background-color: #fbeaea;
+			border-color: #f1adad;
+
+			&:before {
+				background-image: none;
+				color: #dc3232;
+				content: "\f534";
+				font-family: "dashicons";
+				font-size: 16px;
+				height: 16px;
+				left: 15px;
+				top: 10px;
+				width: 16px;
+			}
+
+			p {
+				padding-left: 28px;
+			}
+		}
+
+		.note {
+			font-weight: bold;
+		}
+
+		p {
+			margin-bottom: 20px;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		ul,
+		ol {
+			list-style: none;
+
+			li {
+				position: relative;
+
+				&:before {
+					background-image: url('../images/check.png');
+					background-position: center;
+					background-repeat: no-repeat;
+					content: '';
+					height: 20px;
+					left: -26px;
+					position: absolute;
+					top: 0;
+					width: 20px;
+				}
+			}
+		}
+
+		a {
+
+			&.button {
+				@include primary-button;
+			}
+		}
+
+		input {
+			border-radius: 5px;
+
+			&.button {
+				background-color: $color_white;
+				border-color: $color_primary;
+				color: $color_primary;
+			}
+		}
+
+		.required {
+			color: $color_primary;
+		}
+	}
+
+	ol {
+		list-style: none;
+
+		li {
+			position: relative;
+
+			&:before {
+				background-image: url(../images/check.svg);
+				background-position: center center;
+				background-repeat: no-repeat;
+				background-size: 100% 100%;
+				content: '';
+				height: 16px;
+				left: -2em;
+				position: absolute;
+				top: 0;
+				width: 16px;
+			}
+		}
+	}
+
+	.button.button-primary {
+		@include primary-button();
+		line-height: 2.3;
+
+		&:active,
+		&:focus,
+		&:hover {
+			line-height: 2.3;
+		}
+	}
+
+	.termly-existing-user {
+
+		> form {
+			display: flex;
+
+			> .form-table {
+				flex-grow: 1;
+				margin: 0;
+				width: auto;
+			}
+
+			table,
+			tbody,
+			tr,
+			td,
+			input {
+				display: block;
+			}
+
+			input {
+				line-height: 45px;
+				width: 100%;
+			}
+		}
+
+		td {
+			padding: 0 0 24px;
+		}
+
+		p {
+
+			&.submit {
+				margin-left: 10px;
+
+				input {
+					@include primary-button();
+					background: transparent;
+					color: $color_primary;
+
+					&:active,
+					&:focus,
+					&:hover {
+						background-color: $color_primary;
+						color: $color_white;
+					}
+				}
+			}
+
+			&.disconnect {
+				clear: both;
+
+				a {
+					&.button {
+						background-color: $color_white;
+						border-color: $color_primary;
+						color: $color_primary;
+					}
+				}
+			}
+
+			&.additional-information {
+				clear: both;
+			}
+		}
+	}
+
+	.termly-new-user,
+	.termly-business-settings {
+
+		.submit {
+			margin-top: 0;
+
+			input[type=submit] {
+				@include primary-button;
+			}
+		}
+
+		.termly-form {
+			padding: 1em 0;
+			width: 85%;
+		}
+
+		th {
+			display: none;
+		}
+
+		td {
+			padding: 0;
+		}
+
+		fieldset {
+			clear: both;
+			margin-bottom: 10px;
+
+			&:last-child {
+				margin-bottom: 0;
+				padding-bottom: 0;
+			}
+		}
+
+		label {
+			clear: both;
+			float: left;
+			font-weight: bold;
+			width: 25%;
+		}
+
+		input[type=text],
+		input[type=email],
+		input[type=password] {
+			border-color: #bababa;
+			float: left;
+			line-height: 1;
+			padding: 8px 13px;
+			width: 65%;
+		}
+	}
+
+	.notice {
+		margin: 10px 0;
+	}
+
+	&.termly-logged-out .termly-existing-user {
+
+		th {
+			display: none;
+		}
+
+		tr:nth-child(1) {
+			display: none;
+		}
+
+	}
+
+	.termly-notice {
+		display: inline-block;
+		margin: 10px 0;
+		padding: 6px 12px;
+
+		&.termly-notice-warning {
+			background-color: #fffcf1;
+			border: 2px solid #faeeda;
+			border-radius: 5px;
+			position: relative;
+			width: auto;
+
+			&:before {
+				background-image: url('../images/alert.png');
+				background-position: left center;
+				background-repeat: no-repeat;
+				content: '';
+				height: 14px;
+				left: 15px;
+				position: absolute;
+				top: 17px;
+				width: 14px;
+			}
+
+			p {
+				padding-left: 28px;
+				padding-right: 10px;
+			}
+		}
+
+	}
+
+	.tablenav {
+
+		.button {
+
+			@include primary-button;
+			font-size: 13px;
+			padding: 0 20px;
+
+			&:active,
+			&:focus,
+			&:hover {
+				@include primary-button;
+				font-size: 13px;
+				margin: 0;
+				padding: 0 20px;
+			}
+
+		}
+	}
+}
+
+// Form styles
+.termly-new-user,
+.termly-business-settings {
+
+	.form-table {
+
+		.termly-form {
+
+			background-color: #fff;
+			padding: 1em;
+			width: 27em;
+
+			fieldset {
+				padding-bottom: 10px;
+			}
+
+			label {
+				display: block;
+			}
+
+		}
+	}
+
+}
+
+// Site Scan
+.termly-site-scan {
+
+	.termly-last-scanned {
+		color: $color_text_light;
+		font-size: 0.8rem;
+		margin-left: 0;
+	}
+
+	label[for="termly-site-scan-frequency"] {
+		display: inline-block;
+		margin-top: 12px;
+	}
+}
+
+// Cookie Management
+.termly .termly-left-column .content.cookie-management {
+	padding-bottom: 40px;
+
+	input#search-submit,
+	.tablenav-pages .button {
+		background-color: $color_white;
+		border-color: $color_primary;
+		color: $color_primary;
+
+		&:active,
+		&:focus,
+		&:hover {
+			background-color: $color_primary;
+			color: $color_white;
+		}
+	}
+
+	.tablenav-pages {
+		align-items: center;
+		display: flex;
+		margin: 24px 0 16px;
+
+		.button {
+			padding: 0 10px;
+
+			&:active,
+			&:focus,
+			&:hover {
+				padding: 0 10px;
+			}
+		}
+
+		.pagination-links {
+			align-items: center;
+			display: flex;
+
+			#table-paging {
+				margin: 0 0 0 6px;
+			}
+
+			> span,
+			> a {
+				margin-left: 6px;
+			}
+
+			.button,
+			input {
+				border-radius: 3px;
+			}
+
+			.button {
+				font-size: 18px;
+				line-height: 24px;
+			}
+		}
+	}
+
+	.actions {
+		padding-bottom: 20px;
+	}
+
+	.tablenav.bottom {
+		margin-top: 12px;
+
+		> div {
+			margin-top: 0;
+		}
+	}
+}
+
+// Add cookie
+.termly.termly-edit-cookie .termly-left-column {
+
+	span.required {
+		color: $color_primary;
+	}
+
+	p.submit {
+		margin-top: 20px;
+
+		> * {
+			line-height: 2.3;
+
+			&:active,
+			&:focus,
+			&:hover {
+				line-height: 2.3;
+			}
+		}
+
+		> a,
+		> button {
+			background: transparent;
+			color: $color_primary;
+		}
+
+		> a {
+			border: none;
+			outline-color: $color_primary;
+			margin-right: 12px;
+		}
+
+		> button {
+			border-color: $color_primary;
+			color: $color_primary;
+			margin-right: 12px;
+
+			&:active,
+			&:focus,
+			&:hover {
+				background-color: $color_primary;
+				color: $color_white;
+			}
+		}
+	}
+}
+
+// Banner Settings
+.termly .termly-left-column .content.banner-settings {
+
+	.consent-banner-heading {
+		align-items: center;
+		display: flex;
+		flex-wrap: wrap;
+		margin-bottom: 20px;
+
+		h2 {
+			margin-bottom: 0;
+			margin-right: 16px;
+		}
+
+		p {
+			margin-bottom: 0;
+		}
+
+		a {
+			@include primary-button();
+			align-items: center;
+			display: flex;
+			padding-left: 10px;
+
+			svg {
+				height: 24px;
+				margin-right: 8px;
+				width: 24px;
+			}
+		}
+	}
+
+	.preference-center-snippet {
+		align-items: flex-start;
+		display: flex;
+		flex-wrap: wrap;
+		margin-bottom: 40px;
+		max-width: 620px;
+
+		label {
+			flex-grow: 1;
+			margin-right: 10px;
+		}
+
+		textarea {
+			background-color: #F5F8FC;
+			font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
+			min-height: 32px;
+			width: 100%;
+		}
+
+		button {
+			@include primary-button();
+			background-color: $color_white;
+			border-color: $color_primary;
+			color: $color_primary;
+			cursor: pointer;
+		}
+	}
+}
+
+// Policies
+.termly .termly-left-column .content.policies {
+	padding-bottom: 26px;
+
+	> p {
+		margin-bottom: 24px;
+	}
+
+	.policy-block {
+		align-items: center;
+		border: 1px solid $color_gray;
+		border-radius: 3px;
+		display: flex;
+		margin-bottom: 24px;
+		padding: 26px 40px 26px 26px;
+
+		.policy-left {
+			flex-grow: 1;
+			margin-right: 30px;
+
+			p {
+				margin-bottom: 0;
+			}
+		}
+
+		.policy-header-container {
+			align-items: center;
+			display: flex;
+			margin-bottom: 14px;
+
+			svg {
+				margin-right: 16px;
+			}
+
+			h2 {
+				margin: 0;
+			}
+		}
+
+		p.policy-right {
+			margin-bottom: 0;
+
+			a {
+				@include primary-button();
+				display: flex;
+				padding: 10px 22px 10px;
+
+				svg {
+					height: 24px;
+					margin-right: 8px;
+					width: 24px;
+				}
+			}
+		}
+	}
+}
+
+// The main admin content area
+.termly-content-wrapper {
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+
+	h2.title {
+		margin: 0 0 20px;
+	}
+
+	p {
+		margin: 0 0 40px;
+
+		a {
+			text-decoration: underline
+		}
+
+		&.submit {
+			padding: 0;
+		}
+	}
+
+	p a,
+	th a,
+	td a {
+		color: $color_primary;
+	}
+
+	table:not(.wp-list-table) {
+		margin: 0;
+
+		th,
+		td {
+			padding-bottom: 20px;
+			padding-top: 0;
+		}
+	}
+
+	.termly-content-cell {
+		display: table-cell;
+		margin: 0;
+		padding: 0;
+		vertical-align: top;
+	}
+
+	.termly-left-column {
+		width: 100%;
+	}
+
+	.termly-right-column {
+		width: 300px;
+		padding-left: 20px;
+	}
+
+	input,
+	select,
+	textarea {
+
+		&:focus {
+			border-color: $color_primary;
+		}
+	}
+
+	input#submit {
+		line-height: 2.3;
+	}
+
+	select {
+
+		&:focus,
+		&:hover {
+			color: $color_black;
+		}
+	}
+
+	label.checkbox-container {
+		align-items: center;
+		display: flex;
+
+		input[type="checkbox"] {
+			height: 1em;
+			opacity: 0;
+			position: absolute;
+			width: 1em;
+
+			+ svg {
+				height: 24px;
+				width: 24px;
+			}
+
+			+ svg + span {
+				display: inline-block;
+				padding-left: 12px;
+				position: relative;
+			}
+
+			&:active,
+			&:focus,
+			&:hover {
+
+				+ svg .border {
+					stroke: $color_primary;
+				}
+			}
+
+			&:disabled {
+
+				+ svg .border {
+					stroke: #CED4DA;
+				}
+
+				+ svg + span {
+					opacity: 0.5;
+				}
+			}
+
+			+ svg .checkmark {
+				visibility: hidden;
+			}
+
+			&:checked + svg .checkmark {
+				visibility: visible;
+			}
+		}
+	}
+
+	.termly-account-page-field-wrapper {
+		align-items: center;
+		display: flex;
+		flex-wrap: wrap;
+
+		input {
+			margin-right: 12px;
+			max-width: 500px;
+		}
+
+		a {
+			color: $color_black;
+			margin: 12px 0;
+		}
+	}
+}
+
+// Upgrade sidebar
+.termly-upgrade-sidebar {
+	background-color: #ffffff;
+	box-shadow: 0 0 10px rgba(0,0,0,0.1);
+	max-width: 260px;
+	padding: 10px 20px 20px;
+	width: 100%;
+
+	h2 {
+		color: #547ee7;
+		font-size: 1.7em;
+	}
+
+	ul,
+	ol {
+		background-color: #f7f9ff;
+		list-style: none;
+		padding: 20px 20px 20px 40px;
+
+		li {
+			position: relative;
+
+			&:before {
+				background-image: url('../images/check.png');
+				background-position: center;
+				background-repeat: no-repeat;
+				content: '';
+				height: 20px;
+				left: -26px;
+				position: absolute;
+				top: 0;
+				width: 20px;
+			}
+		}
+	}
+
+	.upgrade-plan-links {
+		align-items: center;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	a {
+
+		&.compare-plans {
+			color: $color_black;
+		}
+
+		&.termly-button {
+			background-color: #2dd1a4;
+			border-radius: 5px;
+			color: #ffffff;
+			display: inline-block;
+			font-size: 15px;
+			margin: 10px 0;
+			padding: 12px 15px;
+			text-decoration: none;
+		}
+
+	}
+
+}
+
+// New user
+.termly .termly-new-user {
+
+	span.required {
+		color: $color_primary;
+	}
+
+	label.checkbox-container {
+		display: flex;
+		float: none;
+		width: 100%;
+	}
+
+	.termly-notice {
+		padding: 12px;
+
+		&:before {
+			top: 15px;
+		}
+
+		p {
+			margin-bottom: 0;
+		}
+	}
+}
+
+/* UPDATE NOTICES */
+#uk-cookie-consent-update {
+
+	.updating-message {
+		.wc_plugin_upgrade_notice {
+			display: none;
+		}
+	}
+
+	.dummy {
+		display: none;
+	}
+
+	.ctcc_plugin_upgrade_notice {
+		font-weight: normal;
+		background: #fff8e5 !important;
+		border-left: 4px solid #ffb900;
+		border-top: 1px solid #ffb900;
+		padding: 9px 0 9px 12px !important;
+		margin: 0 -12px 0 -16px !important;
+
+		&::before {
+			content: "\f348";
+			display: inline-block;
+			font: 400 18px/1 dashicons;
+			speak: never;
+			margin: 0 8px 0 -2px;
+			vertical-align: top;
+		}
+
+		&.minor,
+		&.major {
+			padding: 20px 0 !important;
+
+			&::before {
+				display: none;
+			}
+
+			p {
+				padding: 0 20px;
+				margin: 0;
+				max-width: 700px;
+				line-height: 1.5em;
+
+				&::before {
+					content: "";
+					display: none;
+				}
+			}
+		}
+
+	}
+
+}

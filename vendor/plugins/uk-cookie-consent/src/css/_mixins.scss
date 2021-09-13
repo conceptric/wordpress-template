@@ -1,0 +1,9 @@
+@mixin primary-button {
+	background-color: $color_primary;
+	border-radius: 5px;
+	color: $color_white;
+	font-size: 15px;
+	line-height: 1.5;
+	padding: 5px 15px;
+	text-decoration: none;
+}
