@@ -76,7 +76,7 @@ Notify visitors that your site uses cookies and get consent for their use withou
 
 = Where can I learn more about this plugin? =
 
-To learn more about how this plugin works, visit [the support page](https://help.termly.io/support/solutions/articles/60000666955-how-do-i-install-the-consent-banner-on-wordpress-).
+To learn more about how this plugin works, visit [the support page](https://help.termly.io/support/solutions/articles/69000108290-how-do-i-install-the-consent-banner-on-wordpress-).
 
 = How does Termly's plugin help with data privacy legislation compliance? =
 
@@ -96,7 +96,7 @@ If you choose to display your consent banner as a top or bottom bar, or as a lef
 
 = Will cookies on my site be blocked until a user gives consent to their use? =
 
-Yes, if you enable auto-blocking through the plugin, non-essential cookies will be blocked until your site's visitors have consented to your use of cookies. To learn more about setting up and customizing auto-blocking, [read our developer's guide](https://help.termly.io/support/solutions/articles/60000688982).
+Yes, if you enable auto-blocking through the plugin, non-essential cookies will be blocked until your site's visitors have consented to your use of cookies. To learn more about setting up and customizing auto-blocking, [read our developer's guide](https://help.termly.io/support/solutions/articles/69000252637-auto-blocker-implementation-guide).
 
 = Is GDPR Cookie Consent Banner free? =
 
