@@ -1,5 +1,5 @@
 root                      = File.dirname( __FILE__ ) 
-wp_version                = "5.8.3"                 
+wp_version                = "5.9.2"                 
 app_path                  = "#{root}/app"
 build_path                = "#{root}/public"
 development_shared_path   = "#{root}/shared"
