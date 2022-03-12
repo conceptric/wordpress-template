@@ -6,6 +6,7 @@ development_shared_path   = "#{root}/shared"
 vendor_path               = "#{root}/vendor"
 wp_path                   = "#{vendor_path}/wordpress"
 vendor_plugins_path       = "#{vendor_path}/plugins"
+vendor_themes_path        = "#{vendor_path}/themes"
 wp_unwanted_files         = %w{readme.html license.txt wp-config-sample.php}
 
 desc "Run this command to setup the project structure"
@@ -83,12 +84,12 @@ task :build_plugins do
   puts "Done"
 end
 
-desc "Linking all the application themes"
+desc "Copying all the vendor themes"
 task :build_themes do
-  puts "Linking the application themes"
-  Dir.glob("#{app_path}/themes/*").each do |theme|
-    sh "ln -nfs #{theme} \
-     #{build_path}/wp-content/themes/#{theme.gsub("#{app_path}/themes/", "")}"
+  puts "Copying the vendor themes"
+  Dir.glob("#{vendor_themes_path}/*").each do |theme|
+    sh "cp -Rf #{theme} \
+     #{build_path}/wp-content/themes/#{theme.gsub("#{vendor_themes_path}/", "")}"
   end 
   puts "Done"
 end
