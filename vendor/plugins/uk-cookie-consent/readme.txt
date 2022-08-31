@@ -4,7 +4,7 @@ Tags: cookie law, cookie consent, gdpr, eu privacy directive, cookie banner, coo
 Requires at least: 5.2
 Requires PHP: 5.6
 Tested up to: 5.8
-Stable tag: 3.0.2
+Stable tag: 3.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -76,7 +76,7 @@ Notify visitors that your site uses cookies and get consent for their use withou
 
 = Where can I learn more about this plugin? =
 
-To learn more about how this plugin works, visit [the support page](https://help.termly.io/support/solutions/articles/69000108290-how-do-i-install-the-consent-banner-on-wordpress-).
+To learn more about how this plugin works, visit [the support page](https://help.termly.io/support/solutions/articles/60000666955-how-do-i-install-the-consent-banner-on-wordpress-).
 
 = How does Termly's plugin help with data privacy legislation compliance? =
 
@@ -96,7 +96,7 @@ If you choose to display your consent banner as a top or bottom bar, or as a lef
 
 = Will cookies on my site be blocked until a user gives consent to their use? =
 
-Yes, if you enable auto-blocking through the plugin, non-essential cookies will be blocked until your site's visitors have consented to your use of cookies. To learn more about setting up and customizing auto-blocking, [read our developer's guide](https://help.termly.io/support/solutions/articles/69000252637-auto-blocker-implementation-guide).
+Yes, if you enable auto-blocking through the plugin, non-essential cookies will be blocked until your site's visitors have consented to your use of cookies. To learn more about setting up and customizing auto-blocking, [read our developer's guide](https://help.termly.io/support/solutions/articles/60000688982).
 
 = Is GDPR Cookie Consent Banner free? =
 
@@ -117,6 +117,9 @@ The free plan has a 10,000 monthly unique visitor limit to your consent banner. 
 9. Enable/disable your consent banner with a single click within WordPress. Easily control whether or not the Auto Blocker is enabled.
 
 == Changelog ==
+
+= 3.0.3 =
+* Fixes broken external links in settings.
 
 = 3.0.2 =
 * Updates language throughout the plugin to reflect the change to monthly visitor limitations.

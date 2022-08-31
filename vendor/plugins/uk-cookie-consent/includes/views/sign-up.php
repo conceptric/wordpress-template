@@ -51,7 +51,7 @@
 						submit_button( __( 'Save API Key', 'uk-cookie-consent' ), 'secondary' );
 					?>
 				</form>
-				<p class="additional-information"><?php esc_html_e( 'Log in to the Termly app to retrieve your API key.', 'uk-cookie-consent' ); ?> <a href="https://help.termly.io/support/solutions/articles/60000666955" target="_blank"><?php esc_html_e( 'Learn more', 'uk-cookie-consent' ); ?></a></p>
+				<p class="additional-information"><?php esc_html_e( 'Log in to the Termly app to retrieve your API key.', 'uk-cookie-consent' ); ?> <a href="https://help.termly.io/support/solutions/articles/69000108290-how-do-i-install-the-consent-banner-on-wordpress-" target="_blank"><?php esc_html_e( 'Learn more', 'uk-cookie-consent' ); ?></a></p>
 			</div>
 
 			<?php else : ?>

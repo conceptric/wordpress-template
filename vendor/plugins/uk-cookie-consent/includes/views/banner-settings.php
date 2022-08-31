@@ -71,8 +71,8 @@
 							),
 							[ 'a' => [ 'href' => [], 'target' => [] ] ]
 						),
-						'https://help.termly.io/support/solutions/articles/60000688982',
-						'https://help.termly.io/support/solutions/articles/60000666989-how-to-block-third-party-cookies'
+						'https://help.termly.io/support/solutions/articles/69000108867-how-does-auto-blocker-work-',
+						'https://help.termly.io/support/solutions/articles/69000108889-blocking-javascript-third-party-cookies-manually'
 					);
 					?></p>
 					<p><label class="checkbox-container">

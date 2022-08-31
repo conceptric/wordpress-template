@@ -2,22 +2,64 @@
 # This file is distributed under the same license as the Themes - Twenty Twenty-Two package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-02-25 08:48:12+0000\n"
+"PO-Revision-Date: 2022-07-25 12:07:33+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: GlotPress/3.0.0-alpha.2\n"
+"X-Generator: GlotPress/4.0.0-alpha.1\n"
 "Language: en_GB\n"
 "Project-Id-Version: Themes - Twenty Twenty-Two\n"
 
 #. Description of the theme
+#, gp-priority: high
 msgid "Built on a solidly designed foundation, Twenty Twenty-Two embraces the idea that everyone deserves a truly unique website. The theme’s subtle styles are inspired by the diversity and versatility of birds: its typography is lightweight yet strong, its color palette is drawn from nature, and its layout elements sit gently on the page. The true richness of Twenty Twenty-Two lies in its opportunity for customization. The theme is built to take advantage of the Full Site Editing features introduced in WordPress 5.9, which means that colors, typography, and the layout of every single page on your site can be customized to suit your vision. It also includes dozens of block patterns, opening the door to a wide range of professionally designed layouts in just a few clicks. Whether you’re building a single-page website, a blog, a business website, or a portfolio, Twenty Twenty-Two will help you create a site that is uniquely yours."
 msgstr "Built on a solidly designed foundation, Twenty Twenty-Two embraces the idea that everyone deserves a truly unique website. The theme’s subtle styles are inspired by the diversity and versatility of birds: its typography is lightweight yet strong, its colour palette is drawn from nature, and its layout elements sit gently on the page. The true richness of Twenty Twenty-Two lies in its opportunity for customisation. The theme is built to take advantage of the full site editing features introduced in WordPress 5.9, which means that colours, typography, and the layout of every single page on your site can be customised to suit your vision. It also includes dozens of block patterns, opening the door to a wide range of professionally designed layouts in just a few clicks. Whether you’re building a single-page website, a blog, a business website, or a portfolio, Twenty Twenty-Two will help you create a site that is uniquely yours."
 
 #. Theme Name of the theme
+#, gp-priority: high
 msgid "Twenty Twenty-Two"
 msgstr "Twenty Twenty-Two"
+
+#: styles/swiss.json
+msgctxt "Duotone name"
+msgid "Default filter"
+msgstr "Default filter"
+
+#: styles/swiss.json
+msgctxt "Font family name"
+msgid "Inter"
+msgstr "Inter"
+
+#: styles/swiss.json
+msgctxt "Style variation name"
+msgid "Swiss"
+msgstr "Swiss"
+
+#: styles/pink.json
+msgctxt "Font family name"
+msgid "IBM Plex Mono"
+msgstr "IBM Plex Mono"
+
+#: styles/pink.json
+msgctxt "Font family name"
+msgid "IBM Plex Sans"
+msgstr "IBM Plex Sans"
+
+#: styles/pink.json
+msgctxt "Style variation name"
+msgid "Pink"
+msgstr "Pink"
+
+#: styles/blue.json
+msgctxt "Font family name"
+msgid "DM Sans"
+msgstr "DM Sans"
+
+#: styles/blue.json
+msgctxt "Style variation name"
+msgid "Blue"
+msgstr "Blue"
 
 #: inc/patterns/hidden-404.php:14
 msgid "Search"
@@ -138,27 +180,27 @@ msgctxt "Gradient name"
 msgid "Vertical secondary to tertiary"
 msgstr "Vertical secondary to tertiary"
 
-#: theme.json
+#: theme.json styles/blue.json styles/pink.json styles/swiss.json
 msgctxt "Color name"
 msgid "Tertiary"
 msgstr "Tertiary"
 
-#: theme.json
+#: theme.json styles/blue.json styles/pink.json styles/swiss.json
 msgctxt "Color name"
 msgid "Secondary"
 msgstr "Secondary"
 
-#: theme.json
+#: theme.json styles/blue.json styles/pink.json styles/swiss.json
 msgctxt "Color name"
 msgid "Primary"
 msgstr "Primary"
 
-#: theme.json
+#: theme.json styles/blue.json styles/pink.json styles/swiss.json
 msgctxt "Color name"
 msgid "Background"
 msgstr "Background"
 
-#: theme.json
+#: theme.json styles/blue.json styles/pink.json styles/swiss.json
 msgctxt "Color name"
 msgid "Foreground"
 msgstr "Foreground"
@@ -885,13 +927,16 @@ msgid "Featured"
 msgstr "Featured"
 
 #. Theme URI of the theme
+#, gp-priority: low
 msgid "https://wordpress.org/themes/twentytwentytwo/"
 msgstr "https://en-gb.wordpress.org/themes/twentytwentytwo/"
 
 #. Author URI of the theme
+#, gp-priority: low
 msgid "https://wordpress.org/"
 msgstr "https://en-gb.wordpress.org/"
 
 #. Author of the theme
+#, gp-priority: low
 msgid "the WordPress team"
 msgstr "the WordPress team"
